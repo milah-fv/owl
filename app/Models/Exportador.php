@@ -10,7 +10,7 @@ class Exportador extends Model
     use HasFactory;
     protected $table = 'exportadores';
     protected $fillable = [
-        'nombre', 'rfc', 'domicilio', 'contacto','telefono',
+        'nombre', 'rfc', 'domicilio', 'contacto','telefono', 'pais_origen', 'ciudad_origen',
     ];
 
 

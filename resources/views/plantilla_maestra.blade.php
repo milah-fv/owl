@@ -18,6 +18,7 @@
     <link href="{{ asset('app_assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('app_assets/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet" />
+     
     @section('css')
     
 
@@ -409,6 +410,7 @@
     <script src="{{ asset('app_assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('app_assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('app_assets/js/plugins/chartjs.min.js') }}"></script>
+    
     
     <script>
         var win = navigator.platform.indexOf('Win') > -1;

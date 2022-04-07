@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class AgenteAduanalExportacionController extends Controller
 {
+    public function getEmpresa(){
+        $p = AgenteAduanalExportacion::all();
+        return response()->json($p);
+    }
     /**
      * Display a listing of the resource.
      *

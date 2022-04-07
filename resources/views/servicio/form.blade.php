@@ -1,3 +1,6 @@
+@section('css')
+
+@endsection
 <div class="row">
    
     <div class="col-lg-11">
@@ -31,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="card mb-4">
+        <div class="card mb-4" style="background: #f0dfdf">
             <div class="card-body ">
                 <h6>Recolección</h6>
                 <div class="row">
@@ -87,9 +90,9 @@
                     <div class="col-md-4 col-sm-12">
                        <div class="form-group">
                             <label>Nombre de Empresa Recolectora</label>
-                            <div class="input-group mb-4">
-                              <input class="form-control" name="empresa_recolectora" id="empresa_recolectora" placeholder="Buscar" type="text" autofocus>
-                              <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                            <div class="input-field">
+                              
+                              <input type="text" name="empresa_recolectora" id="empresa_recolectora" class="form-control" autofocus autocomplete="off">
                             </div>
                         </div>
                    </div>
@@ -125,8 +128,9 @@
                            autofocus >
                        </div>
                    </div>
+                    <input type="text" name="id_emp_recolectora" id="id_emp_recolectora" class="form-control" hidden autofocus >
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12 col-sm-12">
                        <div class="form-group">
                            <label>Dirección de Recolección</label>
@@ -134,7 +138,7 @@
                            autofocus >
                        </div>
                    </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -145,14 +149,14 @@
                     <div class="col-md-4 col-sm-12">
                         <div class="form-group">
                            <label>Fecha</label>
-                           <input type="date" name="fecha_entrega" id="fecha_entrega" class="form-control"
+                           <input type="date" name="fecha_entrega_inicio" id="fecha_entrega_inicio" class="form-control"
                            autofocus value="{{ isset($fecha->fecha) ? $fecha->fecha: old('fecha') }}" >
                        </div>
                    </div>
                     <div class="col-md-4 col-sm-12">
                         <div class="form-group">
                            <label>Hora</label>
-                           <select class="form-control" name="hora_entrega">
+                           <select class="form-control" name="hora_entrega_inicio">
                                 <option value="09:00 am">09:00 am</option>
                                 <option value="10:00 am">10:00 am</option>
                                 <option value="11:00 am">11:00 am</option>
@@ -192,15 +196,15 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-sm-12">
-                       <div class="form-group">
+                        <div class="form-group">
                             <label>Nombre de la Empresa</label>
-                            <div class="input-group mb-4">
-                              <input class="form-control" name="empresa_entrega" id="empresa_entrega" placeholder="Buscar" type="text" autofocus>
-                              <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                            <div class="input-field">
+                              <input type="text" name="empresa_carga" id="empresa_carga" class="form-control" autofocus autocomplete="off">
                             </div>
                         </div>
                    </div>
-                   
+
+                                    
                    <div class="col-md-1 col-sm-2">
                        <div class="form-group">
                             <div class="text-center col-md-12 col-sm-12">
@@ -223,24 +227,25 @@
                     <div class="col-md-4 col-sm-12">
                        <div class="form-group">
                            <label>Dirección</label>
-                           <input type="text" name="direccion_entrega" id="direccion_entrega" class="form-control"
+                           <input type="text" name="direccion_emp_carga" id="direccion_emp_carga" class="form-control"
                            autofocus >
                        </div>
                    </div>
                    <div class="col-md-4 col-sm-12">
                        <div class="form-group">
                            <label>Contacto</label>
-                           <input type="text" name="contacto_entrega" id="contacto_entrega" class="form-control"
+                           <input type="text" name="contacto_emp_carga" id="contacto_emp_carga" class="form-control"
                            autofocus >
                        </div>
                    </div>
                    <div class="col-md-4 col-sm-12">
                        <div class="form-group">
                            <label>Telefono</label>
-                           <input type="text" name="telefono_entrega" id="telefono_entrega" class="form-control"
+                           <input type="text" name="telefono_emp_carga" id="telefono_emp_carga" class="form-control"
                            autofocus >
                        </div>
                    </div>
+                   <input type="text" name="id_emp_carga" id="id_emp_carga" class="form-control" hidden autofocus >
                 </div>
             </div>
         </div>
@@ -252,9 +257,8 @@
                     <div class="col-md-4 col-sm-12">
                        <div class="form-group">
                             <label>Nombre del Exportador</label>
-                            <div class="input-group mb-4">
-                              <input class="form-control" name="nombre_exportador" id="nombre_exportador" placeholder="Buscar" type="text" autofocus>
-                              <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                            <div class="input-field">
+                              <input type="text" name="nombre_exportador" id="nombre_exportador" class="form-control" autofocus autocomplete="off">
                             </div>
                         </div>
                    </div>
@@ -276,11 +280,20 @@
                         </div>
                    </div>
 
-                   <div class="col-md-4 col-sm-12" >
+                   <div class="col-md-2 col-sm-12" >
                        <div class="form-group">
-                            <label>Ciudad y País de Origen</label>
+                            <label>País de Origen</label>
                             <div class="input-group mb-4">
-                              <input class="form-control" name="ciudad_pais_origen" id="ciudad_pais_origen"  type="text" autofocus>
+                              <input class="form-control" name="pais_origen" id="pais_origen"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+
+                   <div class="col-md-2 col-sm-12" >
+                       <div class="form-group">
+                            <label>Ciudad de Origen</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="ciudad_origen" id="ciudad_origen"  type="text" autofocus>
                             </div>
                         </div>
                    </div>
@@ -297,7 +310,7 @@
                    <div class="col-md-4 col-sm-12">
                        <div class="form-group">
                            <label>Contacto</label>
-                           <input type="text" name="contacte_exportador" id="contacte_exportador" class="form-control"
+                           <input type="text" name="contacto_exportador" id="contacto_exportador" class="form-control"
                            autofocus >
                        </div>
                    </div>
@@ -308,6 +321,7 @@
                            autofocus >
                        </div>
                    </div>
+                   <input type="text" name="id_exportador" id="id_exportador" class="form-control" hidden autofocus >
                 </div>
             </div>
         </div>
@@ -319,9 +333,8 @@
                     <div class="col-md-4 col-sm-12">
                        <div class="form-group">
                             <label>Nombre del Agente Aduanal de Exportación</label>
-                            <div class="input-group mb-4">
-                              <input class="form-control" name="nombre_ag_ad_exportacion" id="nombre_ag_ad_exportacion" placeholder="Buscar" type="text" autofocus>
-                              <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                            <div class="input-field">
+                              <input type="text" name="nombre_ag_ad_exportacion" id="nombre_ag_ad_exportacion" class="form-control" autofocus autocomplete="off">
                             </div>
                         </div>
                    </div>
@@ -355,7 +368,7 @@
                    <div class="col-md-4 col-sm-12">
                        <div class="form-group">
                            <label>Contacto</label>
-                           <input type="text" name="contacte_ag_ad_exportacion" id="contacte_ag_ad_exportacion" class="form-control"
+                           <input type="text" name="contacto_ag_ad_exportacion" id="contacto_ag_ad_exportacion" class="form-control"
                            autofocus >
                        </div>
                    </div>
@@ -366,6 +379,7 @@
                            autofocus >
                        </div>
                    </div>
+                   <input type="text" name="id_ag_ad_exportacion" id="id_ag_ad_exportacion" class="form-control" hidden autofocus >
                 </div>
             </div>
         </div>
@@ -489,3 +503,146 @@
         </div>
     </div>
 </div>
+@section('scripts')
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Empresa Recolectora -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          //console.log('holi');
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findEmpresa')!!}',
+            success:function(response){
+                //console.log(response);
+                var empresaRecArray = response;
+                var dataEmpRec = {};
+                var dataEmpRec2 = {};
+                for (var i = 0; i < empresaRecArray.length; i++){
+                    dataEmpRec[empresaRecArray[i].nombre] = null;
+                    dataEmpRec2[empresaRecArray[i].nombre] = empresaRecArray[i];
+
+                }
+                //console.log('dataEmpRec2');
+                //console.log(dataEmpRec2);
+                //material
+                 $('input#empresa_recolectora').autocomplete({
+                      data: dataEmpRec,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        //console.log(reqdata);
+                        $('#domicilio_recoleccion').val(dataEmpRec2[reqdata]['domicilio']);
+                        $('#contacto_recoleccion').val(dataEmpRec2[reqdata]['contacto']);
+                        $('#telefono_recoleccion').val(dataEmpRec2[reqdata]['telefono']);
+                        $('#id_emp_recolectora').val(dataEmpRec2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+    <!-- Empresa de Carga -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findEmpresaCarga')!!}',
+            success:function(response){
+                var empresaCargaArray = response;
+                var dataEmpCarga = {};
+                var dataEmpCarga2 = {};
+                for (var i = 0; i < empresaCargaArray.length; i++){
+                    dataEmpCarga[empresaCargaArray[i].nombre] = null;
+                    dataEmpCarga2[empresaCargaArray[i].nombre] = empresaCargaArray[i];
+
+                }
+             
+                 $('input#empresa_carga').autocomplete({
+                      data: dataEmpCarga,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        $('#direccion_emp_carga').val(dataEmpCarga2[reqdata]['direccion']);
+                        $('#contacto_emp_carga').val(dataEmpCarga2[reqdata]['contacto']);
+                        $('#telefono_emp_carga').val(dataEmpCarga2[reqdata]['telefono']);
+                        $('#id_emp_carga').val(dataEmpCarga2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+    <!-- Exportador -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findExportador')!!}',
+            success:function(response){
+                //console.log(response);
+                var exportadorArray = response;
+                var dataExportador = {};
+                var dataExportador2 = {};
+                for (var i = 0; i < exportadorArray.length; i++){
+                    dataExportador[exportadorArray[i].nombre] = null;
+                    dataExportador2[exportadorArray[i].nombre] = exportadorArray[i];
+
+                }
+             
+                 $('input#nombre_exportador').autocomplete({
+                      data: dataExportador,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        $('#rfc_exportador').val(dataExportador2[reqdata]['rfc']);
+                        $('#pais_origen').val(dataExportador2[reqdata]['pais_origen']);
+                        $('#ciudad_origen').val(dataExportador2[reqdata]['ciudad_origen']);
+                        $('#domicilio_exportador').val(dataExportador2[reqdata]['domicilio']);
+                        $('#contacto_exportador').val(dataExportador2[reqdata]['contacto']);
+                        $('#telefono_exportador').val(dataExportador2[reqdata]['telefono']);
+                        $('#id_exportador').val(dataExportador2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+    <!-- Agente Aduanal de Exportación -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findAgAdExportacion')!!}',
+            success:function(response){
+                var agenteAdExportacionArray = response;
+                var dataAgenteAdExportacion = {};
+                var dataAgenteAdExportacion2 = {};
+                for (var i = 0; i < agenteAdExportacionArray.length; i++){
+                    dataAgenteAdExportacion[agenteAdExportacionArray[i].nombre] = null;
+                    dataAgenteAdExportacion2[agenteAdExportacionArray[i].nombre] = agenteAdExportacionArray[i];
+                }
+             
+                 $('input#nombre_ag_ad_exportacion').autocomplete({
+                      data: dataAgenteAdExportacion,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        $('#nit_ag_ad_exportacion').val(dataAgenteAdExportacion2[reqdata]['nit']);
+                        $('#domicilio_ag_ad_exportacion').val(dataAgenteAdExportacion2[reqdata]['domicilio']);
+                        $('#contacto_ag_ad_exportacion').val(dataAgenteAdExportacion2[reqdata]['contacto']);
+                        $('#telefono_ag_ad_exportacion').val(dataAgenteAdExportacion2[reqdata]['telefono']);
+                        $('#id_ag_ad_exportacion').val(dataAgenteAdExportacion2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+@endsection
+

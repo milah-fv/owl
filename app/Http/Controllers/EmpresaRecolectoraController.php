@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class EmpresaRecolectoraController extends Controller
 {
+    public function getEmpresa(){
+        $p = EmpresaRecolectora::all();
+        return response()->json($p);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -82,4 +86,6 @@ class EmpresaRecolectoraController extends Controller
     {
         //
     }
+
+
 }

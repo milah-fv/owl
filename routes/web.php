@@ -8,6 +8,8 @@ use App\Http\Controllers\AgenteAduanalExportacionController;
 use App\Http\Controllers\AgenteAduanalImportacionController;
 use App\Http\Controllers\SerieController;
 use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\EmpresaRecolectoraController;
+use App\Http\Controllers\EmpresaCargaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,10 @@ Route::get('/', function () {
 });
 Route::get('/empleados/create', [EmpleadoController::class, 'create']);
 */
+Route::get('findEmpresa', [EmpresaRecolectoraController::class, 'getEmpresa']);
+Route::get('findEmpresaCarga', [EmpresaCargaController::class, 'getEmpresa']);
+Route::get('findExportador', [ExportadorController::class, 'getEmpresa']);
+Route::get('findAgAdExportacion', [AgenteAduanalExportacionController::class, 'getEmpresa']);
 Route::resource('empleados', EmpleadoController::class);
 Route::resource('exportador', ExportadorController::class);
 Route::resource('importador', ImportadorController::class);
@@ -39,3 +45,4 @@ Route::resource('ag_ad_exportacion', AgenteAduanalExportacionController::class);
 Route::resource('ag_ad_importacion', AgenteAduanalImportacionController::class);
 Route::resource('serie', SerieController::class);
 Route::resource('servicios', ServicioController::class);
+

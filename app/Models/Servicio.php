@@ -35,14 +35,17 @@ class Servicio extends Model
     public function recolecciones(){
         return $this->hasMany(Recoleccion::class);
     }
+    public function cargas(){
+        return $this->hasMany(EntregaInicio::class);
+    }
 
     //Relación muchos a muchos
     /*public function recolecciones(){
         return $this->belongsToMany(EmpresaRecolectora::class);
     }*/
-    public function cargas(){
+    /*public function cargas(){
         return $this->belongsToMany(EmpresaCarga::class);
-    }
+    }*/
     /* public function ent_final(){
         return $this->belongsToMany(Importador::class);
     } */

@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class EntregaInicio extends Model
 {
     use HasFactory;
+    protected $table = 'entrega_inicio';
+    protected $fillable = [
+        'id', 'fecha', 'hora', 'tipo_transporte', 'lugar_carga', 'servicio_id', 'emp_carga_id', 
+    ];
+
+    public function empresaCarga(){
+        return $this->belognsTo(EmpresaCarga::class);
+    }
+    public function servicio(){
+        return $this->belognsTo(Servicio::class);
+    }
+
 }

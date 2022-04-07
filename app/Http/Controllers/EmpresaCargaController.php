@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class EmpresaCargaController extends Controller
 {
+    public function getEmpresa(){
+        $p = EmpresaCarga::all();
+        return response()->json($p);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -8,6 +8,10 @@ Use Alert;
 
 class ExportadorController extends Controller
 {
+    public function getEmpresa(){
+        $p = Exportador::all();
+        return response()->json($p);
+    }
     /**
      * Display a listing of the resource.
      *

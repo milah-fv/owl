@@ -18,6 +18,7 @@ class CreateEntregaInicioTable extends Migration
             $table->date('fecha')->nullable();
             $table->string('hora', 20)->nullable();
             $table->string('tipo_transporte', 30)->nullable();
+            $table->string('lugar_carga', 50)->nullable();
             $table->unsignedBigInteger('servicio_id')->nullable();
             $table->unsignedBigInteger('emp_carga_id')->nullable();
             $table->foreign('servicio_id')

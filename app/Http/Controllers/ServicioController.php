@@ -7,6 +7,7 @@ Use Alert;
 use App\Models\Servicio;
 use App\Models\Serie;
 use App\Models\Recoleccion;
+use App\Models\EntregaInicio;
 
 class ServicioController extends Controller
 {
@@ -45,6 +46,8 @@ class ServicioController extends Controller
         $servicio = Servicio::create([
             'fecha' => $request->fecha_servicio,
             'serie_id' => $request->series,
+            'exportador_id' => $request->id_exportador,
+            'agente_exportacion_id' => $request->id_ag_ad_exportacion,
         ]);
         $meServicio = Servicio::find($servicio->id);
 
@@ -52,8 +55,20 @@ class ServicioController extends Controller
         $recoleccion->fecha = $request->fecha_recoleccion;
         $recoleccion->hora = $request->hora_recoleccion;
         $recoleccion->tipo_transporte = $request->tipo_transporte_recoleccion;
-        $recoleccion->direccion = $request->dirección_recoleccion;
+        $recoleccion->emp_recolectora_id = $request->id_emp_recolectora;
+        //$recoleccion->direccion = $request->dirección_recoleccion;
         $meServicio->recolecciones()->save($recoleccion);
+
+        $entregaInicio = new EntregaInicio;
+        $entregaInicio->fecha = $request->fecha_entrega_inicio;
+        $entregaInicio->hora = $request->hora_entrega_inicio;
+        $entregaInicio->tipo_transporte = $request->tipo_transporte_entrega;
+        $entregaInicio->lugar_carga = $request->lugar_carga_entrega;
+        $entregaInicio->emp_carga_id = $request->id_emp_carga;
+        $meServicio->cargas()->save($entregaInicio);
+
+
+
 
 
 
