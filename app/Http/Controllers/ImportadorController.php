@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ImportadorController extends Controller
 {
+    public function getEmpresa(){
+        $p = Importador::all();
+        return response()->json($p);
+    }
     /**
      * Display a listing of the resource.
      *

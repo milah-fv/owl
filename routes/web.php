@@ -38,6 +38,8 @@ Route::get('findEmpresa', [EmpresaRecolectoraController::class, 'getEmpresa']);
 Route::get('findEmpresaCarga', [EmpresaCargaController::class, 'getEmpresa']);
 Route::get('findExportador', [ExportadorController::class, 'getEmpresa']);
 Route::get('findAgAdExportacion', [AgenteAduanalExportacionController::class, 'getEmpresa']);
+Route::get('findImportador', [ImportadorController::class, 'getEmpresa']);
+Route::get('findAgAdEImportacion', [AgenteAduanalImportacionController::class, 'getEmpresa']);
 Route::resource('empleados', EmpleadoController::class);
 Route::resource('exportador', ExportadorController::class);
 Route::resource('importador', ImportadorController::class);

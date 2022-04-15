@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="card mb-4" style="background: #f0dfdf">
+        <div class="card mb-4" >
             <div class="card-body ">
                 <h6>Recolección</h6>
                 <div class="row">
@@ -384,6 +384,121 @@
             </div>
         </div>
         <hr>
+        <div class="card mb-4" style="background: #dceff2">
+            <div class="card-body ">
+                <h6>Importador</h6>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                       <div class="form-group">
+                            <label>Nombre del Importador</label>
+                            <div class="input-field">
+                              <input type="text" name="nombre_importador" id="nombre_importador" class="form-control" autofocus autocomplete="off">
+                            </div>
+                        </div>
+                   </div>
+                   
+                   <div class="col-md-1 col-sm-2">
+                       <div class="form-group">
+                            <div class="text-center col-md-12 col-sm-12">
+                                <a href="" class="btn bg-gradient-secondary w-100 mt-4 mb-0"><i class="ni ni-fat-add"></i></a>
+                            </div>
+                        </div>
+                   </div>
+
+                   <div class="col-md-3 col-sm-12" >
+                       <div class="form-group">
+                            <label>NIT</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="nit_importador" id="nit_importador"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                       <div class="form-group">
+                           <label>Domicilio</label>
+                           <input type="text" name="domicilio_importador" id="domicilio_importador" class="form-control"
+                           autofocus >
+                       </div>
+                   </div>
+                   <div class="col-md-4 col-sm-12">
+                       <div class="form-group">
+                           <label>Contacto</label>
+                           <input type="text" name="contacto_importador" id="contacto_importador" class="form-control"
+                           autofocus >
+                       </div>
+                   </div>
+                   <div class="col-md-4 col-sm-12">
+                       <div class="form-group">
+                           <label>Telefono</label>
+                           <input type="text" name="telefono_importador" id="telefono_importador" class="form-control"
+                           autofocus >
+                       </div>
+                   </div>
+                   <input type="text" name="id_importador" id="id_importador" class="form-control" hidden autofocus >
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4" style="background: #dceff2">
+            <div class="card-body ">
+                <h6>Agente Aduanal de Importación</h6>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                       <div class="form-group">
+                            <label>Nombre del Agente Aduanal de Importación</label>
+                            <div class="input-field">
+                              <input type="text" name="nombre_ag_ad_importacion" id="nombre_ag_ad_importacion" class="form-control" autofocus autocomplete="off">
+                            </div>
+                        </div>
+                   </div>
+                   
+                   <div class="col-md-1 col-sm-2">
+                       <div class="form-group">
+                            <div class="text-center col-md-12 col-sm-12">
+                                <a href="" class="btn bg-gradient-secondary w-100 mt-4 mb-0"><i class="ni ni-fat-add"></i></a>
+                            </div>
+                        </div>
+                   </div>
+
+                   <div class="col-md-3 col-sm-12" >
+                       <div class="form-group">
+                            <label>NIT</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="nit_ag_ad_importacion" id="nit_ag_ad_importacion"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                       <div class="form-group">
+                           <label>Domicilio</label>
+                           <input type="text" name="domicilio_ag_ad_importacion" id="domicilio_ag_ad_importacion" class="form-control"
+                           autofocus >
+                       </div>
+                   </div>
+                   <div class="col-md-4 col-sm-12">
+                       <div class="form-group">
+                           <label>Contacto</label>
+                           <input type="text" name="contacto_ag_ad_importacion" id="contacto_ag_ad_importacion" class="form-control"
+                           autofocus >
+                       </div>
+                   </div>
+                   <div class="col-md-4 col-sm-12">
+                       <div class="form-group">
+                           <label>Telefono</label>
+                           <input type="text" name="telefono_ag_ad_importacion" id="telefono_ag_ad_importacion" class="form-control"
+                           autofocus >
+                       </div>
+                   </div>
+                   <input type="text" name="id_ag_ad_importacion" id="id_ag_ad_importacion" class="form-control" hidden autofocus >
+                </div>
+            </div>
+        </div>
+        <hr>
         <div class="card mb-4">
             <div class="card-body ">
                 <h6>Información de Servicio</h6>
@@ -636,6 +751,70 @@
                         $('#contacto_ag_ad_exportacion').val(dataAgenteAdExportacion2[reqdata]['contacto']);
                         $('#telefono_ag_ad_exportacion').val(dataAgenteAdExportacion2[reqdata]['telefono']);
                         $('#id_ag_ad_exportacion').val(dataAgenteAdExportacion2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+    <!-- Importador -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findImportador')!!}',
+            success:function(response){
+                var importadorArray = response;
+                var dataImportador = {};
+                var dataImportador2 = {};
+                for (var i = 0; i < importadorArray.length; i++){
+                    dataImportador[importadorArray[i].nombre] = null;
+                    dataImportador2[importadorArray[i].nombre] = importadorArray[i];
+                }
+             
+                 $('input#nombre_importador').autocomplete({
+                      data: dataImportador,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        $('#nit_importador').val(dataAgenteAdExportacion2[reqdata]['nit']);
+                        $('#domicilio_importador').val(dataAgenteAdExportacion2[reqdata]['domicilio']);
+                        $('#contacto_importador').val(dataAgenteAdExportacion2[reqdata]['contacto']);
+                        $('#telefono_importador').val(dataAgenteAdExportacion2[reqdata]['telefono']);
+                        $('#id_importador').val(dataAgenteAdExportacion2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+    <!-- Agente Aduanal de Importación -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findAgAdEImportacion')!!}',
+            success:function(response){
+                var agenteAdImportacionArray = response;
+                var dataAgenteAdImportacion = {};
+                var dataAgenteAdImportacion2 = {};
+                for (var i = 0; i < agenteAdImportacionArray.length; i++){
+                    dataAgenteAdImportacion[agenteAdImportacionArray[i].nombre] = null;
+                    dataAgenteAdImportacion2[agenteAdImportacionArray[i].nombre] = agenteAdImportacionArray[i];
+                }
+             
+                 $('input#nombre_ag_ad_importacion').autocomplete({
+                      data: dataAgenteAdImportacion,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        $('#nit_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['nit']);
+                        $('#domicilio_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['domicilio']);
+                        $('#contacto_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['contacto']);
+                        $('#telefono_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['telefono']);
+                        $('#id_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['id']);
                  
                       }
                     });
