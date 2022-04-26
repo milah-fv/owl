@@ -15,9 +15,9 @@ class Recoleccion extends Model
     ];
 
     public function empresaRecolectora(){
-        return $this->belognsTo(EmpresaRecolectora::class);
+        return $this->belongsTo(EmpresaRecolectora::class);
     }
-    public function servicio(){
-        return $this->belognsTo(Servicio::class);
-    }
+    /*public function servicio(){
+        return $this->belongsTo(Servicio::class);
+    } */
 }

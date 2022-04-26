@@ -33,11 +33,16 @@ class Servicio extends Model
         return $this->belongsTo(Estado::class);
     }
     public function recolecciones(){
-        return $this->hasMany(Recoleccion::class);
+        return $this->hasOne(Recoleccion::class);
     }
     public function cargas(){
-        return $this->hasMany(EntregaInicio::class);
+        return $this->hasOne(EntregaInicio::class);
     }
+    //hasMany
+    public function detalle(){
+        return $this->hasOne(ServicioDetalles::class);
+    }
+    
 
     //Relación muchos a muchos
     /*public function recolecciones(){

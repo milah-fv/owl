@@ -547,7 +547,7 @@
 
                    <div class="col-md-3 col-sm-12" >
                        <div class="form-group">
-                            <label>Pero Neto</label>
+                            <label>Peso Neto</label>
                             <div class="input-group mb-4">
                               <input class="form-control" name="peso_mercancia" id="peso_mercancia"  type="text" autofocus placeholder="En Kg.">
                             </div>
@@ -778,11 +778,11 @@
                       data: dataImportador,
                       limit:5,
                       onAutocomplete:function(reqdata){
-                        $('#nit_importador').val(dataAgenteAdExportacion2[reqdata]['nit']);
-                        $('#domicilio_importador').val(dataAgenteAdExportacion2[reqdata]['domicilio']);
-                        $('#contacto_importador').val(dataAgenteAdExportacion2[reqdata]['contacto']);
-                        $('#telefono_importador').val(dataAgenteAdExportacion2[reqdata]['telefono']);
-                        $('#id_importador').val(dataAgenteAdExportacion2[reqdata]['id']);
+                        $('#nit_importador').val(dataImportador2[reqdata]['nit']);
+                        $('#domicilio_importador').val(dataImportador2[reqdata]['domicilio']);
+                        $('#contacto_importador').val(dataImportador2[reqdata]['contacto']);
+                        $('#telefono_importador').val(dataImportador2[reqdata]['telefono']);
+                        $('#id_importador').val(dataImportador2[reqdata]['id']);
                  
                       }
                     });
@@ -796,7 +796,7 @@
         $(document).ready(function(){
           $.ajax({
             type: 'get',
-            url:'{!!URL::to('findAgAdEImportacion')!!}',
+            url:'{!!URL::to('findAgAdImportacion')!!}',
             success:function(response){
                 var agenteAdImportacionArray = response;
                 var dataAgenteAdImportacion = {};
@@ -810,11 +810,11 @@
                       data: dataAgenteAdImportacion,
                       limit:5,
                       onAutocomplete:function(reqdata){
-                        $('#nit_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['nit']);
-                        $('#domicilio_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['domicilio']);
-                        $('#contacto_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['contacto']);
-                        $('#telefono_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['telefono']);
-                        $('#id_ag_ad_importacion').val(dataAgenteAdExportacion2[reqdata]['id']);
+                        $('#nit_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['nit']);
+                        $('#domicilio_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['domicilio']);
+                        $('#contacto_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['contacto']);
+                        $('#telefono_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['telefono']);
+                        $('#id_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['id']);
                  
                       }
                     });
@@ -822,6 +822,8 @@
           })
         });
     </script>
+
+
 
 @endsection
 

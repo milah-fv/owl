@@ -12,7 +12,6 @@ class EmpresaRecolectora extends Model
     protected $fillable = [
         'id', 'nombre', 'domicilio', 'contacto', 'telefono',
     ];
-
     //Relación muchos a muchos
     /* public function servicios(){
         return $this->belongsToMany(Servicio::class);

@@ -8,6 +8,9 @@ use App\Models\Servicio;
 use App\Models\Serie;
 use App\Models\Recoleccion;
 use App\Models\EntregaInicio;
+use App\Models\ServicioDetalles;
+
+
 
 class ServicioController extends Controller
 {
@@ -18,7 +21,37 @@ class ServicioController extends Controller
      */
     public function index()
     {
+        /*$servicios = Servicio::latest()->get();
+
+        return view('servicio.index',
+        [
+          'servicios' => $servicios
+        ]); */
         return view('servicio.index');
+    }
+    // Tabla de Servicios
+    public function datatableServicios()
+    {
+        $model = Servicio::all();
+        $model->each(function($servicio)
+        {            
+            $servicio->exportador;
+            $servicio->agente_ad_exportacion;
+            $servicio->importador;
+            $servicio->agente_ad_importacion;
+            $servicio->serie;
+            $servicio->estado;
+            $servicio->recolecciones;
+            $servicio->recolecciones->empresaRecolectora;
+            $servicio->cargas;
+            $servicio->detalle;
+            //$servicio->fecha = $servicio->fecha->format('d/m/Y');
+        });
+        $data = datatables()->of($model)
+        ->addColumn('btn', 'servicio.botones')
+        ->rawColumns(['btn'])
+        ->toJson();
+        return $data;
     }
 
     /**
@@ -48,6 +81,8 @@ class ServicioController extends Controller
             'serie_id' => $request->series,
             'exportador_id' => $request->id_exportador,
             'agente_exportacion_id' => $request->id_ag_ad_exportacion,
+            'importador_id' => $request->id_importador,
+            'agente_importacion_id' => $request->id_ag_ad_importacion,
         ]);
         $meServicio = Servicio::find($servicio->id);
 
@@ -67,10 +102,18 @@ class ServicioController extends Controller
         $entregaInicio->emp_carga_id = $request->id_emp_carga;
         $meServicio->cargas()->save($entregaInicio);
 
-
-
-
-
+        $servicioDetalle = new ServicioDetalles;
+        $servicioDetalle->nro_pedido_cliente = $request->nro_pedido;
+        $servicioDetalle->nro_factura_cliente = $request->nro_factura;
+        $servicioDetalle->fecha_factura = $request->fecha_factura;
+        $servicioDetalle->valor_mercancia = $request->valor_mercancia;
+        $servicioDetalle->peso_neto = $request->peso_mercancia;
+        $servicioDetalle->volumen = $request->volumen_mercancia;
+        $servicioDetalle->pallets = $request->pallets;
+        $servicioDetalle->descripcion_mercancia = $request->descripcion_mercancia;
+        $servicioDetalle->fraccion_arancelaria = $request->fraccion_arancelaria;
+        $servicioDetalle->regimen_aduanero = $request->regimen_aduanero;
+        $meServicio->detalle()->save($servicioDetalle);
 
         toast('Servicio registrado correctamente!','success');
         return redirect('/servicios');
@@ -93,9 +136,12 @@ class ServicioController extends Controller
      * @param  \App\Models\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Servicio $servicio)
+    public function edit($id)
     {
-        //
+        $servicio = Servicio::findOrFail($id);
+        return view('servicio.edit', [
+            'servicio' => $servicio,
+        ]);
     }
 
     /**

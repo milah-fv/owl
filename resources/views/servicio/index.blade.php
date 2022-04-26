@@ -2,7 +2,10 @@
 @section('titulo', 'Servicio')
 @section('subtitulo1', 'Servicios')
 @section('subtitulo2', 'Lista de Servicios')
-
+@section('css')
+  <link href="{{ asset('plugins/datatables/datatables.css') }}" rel="stylesheet">
+  <link href="{{ asset('plugins/datatables/responsive.bootstrap.css') }}" rel="stylesheet">
+@endsection
 @section('menu-1')
       <li class="nav-item">
         <a class="nav-link active " href="/servicios">
@@ -46,6 +49,50 @@
           </div>
         </div><br>
 
+
+        <div class="card-body">
+          <div class="table-responsive p-2">
+            <table class="table align-items-center justify-content-center mb-0" id="tblservicios">
+              <thead>
+                <tr>
+                  <th> created_at</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
+                  N°</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  Código</th>
+                  <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  Fecha Reg.</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  Exportador</th>
+                  <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  Importador</th>
+                  
+                  <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  Estado</th>
+                  <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
+                  Opciones</th>
+                  <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
+                  Recolección: </th>
+                  <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
+                  Entrega Inicio: </th>
+                  <!--<th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
+                  Entrega Final: </th> -->
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+              
+            </table>
+          </div>
+        </div>
+
         
 
       </div>
@@ -58,31 +105,74 @@
 @section('scripts')
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
+  <script src="{{ asset('plugins/datatables/datatables.min.js') }}" type="text/javascript" ></script>
+  <script src="{{ asset('plugins/datatables/dataTables.responsive.js') }}" type="text/javascript" ></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="text/javascript">
     $('#tblservicios').DataTable(
       {
-        responsive: true,
-        autoWidth: false,
-        "language": {
-            "lengthMenu": "Mostrar " 
-                      +
-                      '<select class="form-select form-select-sm"> <option value="10"> 10 </option> <option value="25"> 25 </option> <option value="50"> 50 </option> <option value="100"> 100 </option> <option value="-1"> Todos </option> </select>'
-                      + " registros por página",
-            "zeroRecords": "Lo sentimos, no se encontraron registros",
-            "info": "Página _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(Filtrando de un total de _MAX_ registros)",
-            "search": "Buscar: ",
-            "paginate": {
-              "next": "<i class='fa fa-angle-right'></i>",
-              "previous": "<i class='fa fa-angle-left'></i>",
-            }
-        },
+          "processing": true,
+          "serverSide": true,
+          "ajax": "/servicioJson",
+          "columns": [
+            {data: 'created_at'},
+            {data: 'id'},
+            {data: 'codigo'},
+            {data: 'fecha'},
+            {data: 'exportador.nombre'},
+            {data: 'importador.nombre'},
+            {data: 'estado_id'},
+            // opciones en vez de serie
+            {data: 'btn'},
+            //{data: 'detalle.fecha_factura'},
+            //
+            {data: 'recolecciones', 
+              render: function(data) 
+                    {
+                        return '<br> <ul> <b>Fecha : </b>'+ data.fecha + ' - <b> Hora : </b>'+ data.hora +'</ul> <ul> <b>Tipo de Transporte : </b>' + data.tipo_transporte  + '</ul>';
+                    }
+            },
+            {data: 'cargas', 
+              render: function(data) 
+                    {
+                        return '<br> <ul> <b>Fecha : </b>'+ data.fecha + ' - <b> Hora : </b>'+ data.hora +'</ul> <ul> <b>Tipo de Transporte : </b>' + data.tipo_transporte + '</ul>';
+                    }
+            },
+
+            
+            //{data: 'cargas.'},
+   
+          ],
+          "order": [[ 0, "desc" ]],            
+            "responsive":  true,
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                { "targets":[0,1,2,3,4,5,6,7], "className": "desktop" },
+                { "targets":[0,1,2,3,6,7], "className": "tablet, mobile" },
+                { "targets":[8,9], "className": "none" },
+                { "orderable": false, "targets": [4] }
+            ],
+          responsive: true,
+          autoWidth: false,
+          "language": {
+              "lengthMenu": "Mostrar " 
+                        +
+                        '<select class="form-select form-select-sm"> <option value="10"> 10 </option> <option value="25"> 25 </option> <option value="50"> 50 </option> <option value="100"> 100 </option> <option value="-1"> Todos </option> </select>'
+                        + " registros por página",
+              "zeroRecords": "Lo sentimos, no se encontraron registros",
+              "info": "Página _PAGE_ de _PAGES_",
+              "infoEmpty": "No hay registros disponibles",
+              "infoFiltered": "(Filtrando de un total de _MAX_ registros)",
+              "search": "Buscar: ",
+              "paginate": {
+                "next": "<i class='fa fa-angle-right'></i>",
+                "previous": "<i class='fa fa-angle-left'></i>",
+              }
+          },
       });
   </script>
   <script type="text/javascript">
@@ -103,7 +193,7 @@
         .then((willDelete) => {
           if (willDelete) {
             this.submit();
-            swal("Servicio eliminada satisfactoriamente!", {
+            swal("Servicio eliminado satisfactoriamente!", {
               icon: "success",
             });
           } else {

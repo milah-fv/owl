@@ -39,7 +39,7 @@ Route::get('findEmpresaCarga', [EmpresaCargaController::class, 'getEmpresa']);
 Route::get('findExportador', [ExportadorController::class, 'getEmpresa']);
 Route::get('findAgAdExportacion', [AgenteAduanalExportacionController::class, 'getEmpresa']);
 Route::get('findImportador', [ImportadorController::class, 'getEmpresa']);
-Route::get('findAgAdEImportacion', [AgenteAduanalImportacionController::class, 'getEmpresa']);
+Route::get('findAgAdImportacion', [AgenteAduanalImportacionController::class, 'getEmpresa']);
 Route::resource('empleados', EmpleadoController::class);
 Route::resource('exportador', ExportadorController::class);
 Route::resource('importador', ImportadorController::class);
@@ -47,4 +47,5 @@ Route::resource('ag_ad_exportacion', AgenteAduanalExportacionController::class);
 Route::resource('ag_ad_importacion', AgenteAduanalImportacionController::class);
 Route::resource('serie', SerieController::class);
 Route::resource('servicios', ServicioController::class);
+Route::get('servicioJson',[ServicioController::class, 'datatableServicios']);
 

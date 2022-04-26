@@ -176,6 +176,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
 
 
     ],
@@ -235,6 +237,7 @@ return [
 
         'Image' => Intervention\Image\Facades\Image::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        //'Date' => Jenssegers\Date\Date::class,
 
     ],
 

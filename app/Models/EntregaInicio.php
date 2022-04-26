@@ -16,8 +16,8 @@ class EntregaInicio extends Model
     public function empresaCarga(){
         return $this->belognsTo(EmpresaCarga::class);
     }
-    public function servicio(){
+    /*public function servicio(){
         return $this->belognsTo(Servicio::class);
-    }
+    }*/
 
 }
