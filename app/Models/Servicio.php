@@ -18,13 +18,13 @@ class Servicio extends Model
         return $this->belongsTo(Exportador::class);
     }
     public function agente_ad_exportacion(){
-        return $this->belongsTo(AgenteAduanalExportacion::class);
+        return $this->belongsTo(AgenteAduanalExportacion::class, 'agente_exportacion_id');
     }
     public function importador(){
         return $this->belongsTo(Importador::class);
     }
     public function agente_ad_importacion(){
-        return $this->belongsTo(AgenteAduanalImportacion::class);
+        return $this->belongsTo(AgenteAduanalImportacion::class, 'agente_importacion_id');
     }
     public function serie(){
         return $this->belongsTo(Serie::class);

@@ -14,7 +14,7 @@ class EntregaInicio extends Model
     ];
 
     public function empresaCarga(){
-        return $this->belognsTo(EmpresaCarga::class);
+        return $this->belongsTo(EmpresaCarga::class, 'emp_carga_id');
     }
     /*public function servicio(){
         return $this->belognsTo(Servicio::class);

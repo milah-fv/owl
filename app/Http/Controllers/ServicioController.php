@@ -139,8 +139,10 @@ class ServicioController extends Controller
     public function edit($id)
     {
         $servicio = Servicio::findOrFail($id);
+        $series = Serie::all();
         return view('servicio.edit', [
             'servicio' => $servicio,
+            'series' => $series,
         ]);
     }
 
@@ -151,9 +153,45 @@ class ServicioController extends Controller
      * @param  \App\Models\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Servicio $servicio)
+    public function update(Request $request, $id)
     {
-        //
+        $servicio = Servicio::findOrFail($id);
+        $servicio->fecha = $request->fecha_servicio;
+        $servicio->serie_id = $request->series;
+        $servicio->exportador_id = $request->id_exportador;
+        $servicio->agente_exportacion_id = $request->id_ag_ad_exportacion;
+        $servicio->importador_id = $request->id_importador;
+        $servicio->agente_importacion_id = $request->id_ag_ad_importacion;
+        $servicio->save();
+
+        $servicio->recolecciones->update([
+                'fecha' => $request->fecha_recoleccion,
+                'hora' => $request->hora_recoleccion,
+                'tipo_transporte' => $request->tipo_transporte_recoleccion,
+                'emp_recolectora_id' => $request->id_emp_recolectora,
+            ]);
+        $servicio->cargas->update([
+                'fecha' => $request->fecha_entrega_inicio,
+                'hora' => $request->hora_entrega_inicio,
+                'tipo_transporte' => $request->tipo_transporte_entrega,
+                'lugar_carga' => $request->lugar_carga_entrega,
+                'emp_carga_id' => $request->id_emp_carga,
+            ]);
+        $servicio->detalle->update([
+                'nro_pedido_cliente' => $request->nro_pedido,
+                'nro_factura_cliente' => $request->nro_factura,
+                'fecha_factura' => $request->fecha_factura,
+                'valor_mercancia' => $request->valor_mercancia,
+                'peso_neto' => $request->peso_mercancia,
+                'volumen' => $request->volumen_mercancia,
+                'pallets' => $request->pallets,
+                'descripcion_mercancia' => $request->descripcion_mercancia,
+                'fraccion_arancelaria' => $request->fraccion_arancelaria,
+                'regimen_aduanero' => $request->regimen_aduanero,
+            ]);
+        toast('Servicio actualizado correctamente!','success');
+        return redirect('/servicios');
+
     }
 
     /**
