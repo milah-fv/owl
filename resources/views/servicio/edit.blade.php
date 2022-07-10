@@ -139,10 +139,10 @@
                             <div class="row">
                                 <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
-                                        <label>Nombre de Empresa Recolectora</label>
+                                        <label>Nombre de Empresa</label>
                                         <div class="input-field">
                                           
-                                          <input type="text" name="empresa_recolectora" id="empresa_recolectora" class="form-control" autofocus autocomplete="off" value="{{old('empresa_recolectora', $servicio->recolecciones->empresaRecolectora['nombre'])}}">
+                                          <input type="text" name="empresa_recolectora" id="empresa_recolectora" class="form-control" autofocus autocomplete="off" value="{{old('empresa_recolectora', $servicio->recolecciones->empresaTransporte['nombre'])}}">
                                         </div>
                                     </div>
                                </div>
@@ -159,26 +159,26 @@
                             <div class="row">
                                 <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
-                                       <label>Domicilio de la Empresa Recolectora</label>
+                                       <label>Domicilio</label>
                                        <input type="text" name="domicilio_recoleccion" id="domicilio_recoleccion" class="form-control"
-                                       autofocus value="{{old('domicilio_recoleccion', $servicio->recolecciones->empresaRecolectora['domicilio'])}}">
+                                       autofocus value="{{old('domicilio_recoleccion', $servicio->recolecciones->empresaTransporte['domicilio'])}}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Contacto</label>
                                        <input type="text" name="contacto_recoleccion" id="contacto_recoleccion" class="form-control"
-                                       autofocus value="{{old('contacto_recoleccion', $servicio->recolecciones->empresaRecolectora['contacto'])}}">
+                                       autofocus value="{{old('contacto_recoleccion', $servicio->recolecciones->empresaTransporte['contacto'])}}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Telefono</label>
                                        <input type="text" name="telefono_recoleccion" id="telefono_recoleccion" class="form-control"
-                                       autofocus value="{{old('telefono_recoleccion', $servicio->recolecciones->empresaRecolectora['telefono'])}}">
+                                       autofocus value="{{old('telefono_recoleccion', $servicio->recolecciones->empresaTransporte['telefono'])}}">
                                    </div>
                                </div>
-                                <input type="text" name="id_emp_recolectora" id="id_emp_recolectora" class="form-control" hidden autofocus value="{{old('id_emp_recolectora', $servicio->recolecciones->empresaRecolectora['id'])}}">
+                                <input type="text" name="id_emp_recolectora" id="id_emp_recolectora" class="form-control" hidden autofocus value="{{old('id_emp_recolectora', $servicio->recolecciones->empresaTransporte['id'])}}">
                             </div>
                         </div>
                     </div>
@@ -241,7 +241,7 @@
                                     <div class="form-group">
                                         <label>Nombre de la Empresa</label>
                                         <div class="input-field">
-                                          <input type="text" name="empresa_carga" id="empresa_carga" class="form-control" autofocus autocomplete="off" value="{{old('empresa_carga', $servicio->cargas->empresaCarga['nombre'])}}">
+                                          <input type="text" name="empresa_carga" id="empresa_carga" class="form-control" autofocus autocomplete="off" value="{{old('empresa_carga', $servicio->cargas->empresaTransporte['nombre'])}}">
                                         </div>
                                     </div>
                                </div>
@@ -270,24 +270,24 @@
                                    <div class="form-group">
                                        <label>Dirección</label>
                                        <input type="text" name="direccion_emp_carga" id="direccion_emp_carga" class="form-control"
-                                       autofocus  value="{{old('direccion_emp_carga', $servicio->cargas->empresaCarga['direccion'])}}">
+                                       autofocus  value="{{old('direccion_emp_carga', $servicio->cargas->empresaTransporte['domicilio'])}}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Contacto</label>
                                        <input type="text" name="contacto_emp_carga" id="contacto_emp_carga" class="form-control"
-                                       autofocus  value="{{old('contacto_emp_carga', $servicio->cargas->empresaCarga['contacto'])}}" >
+                                       autofocus  value="{{old('contacto_emp_carga', $servicio->cargas->empresaTransporte['contacto'])}}" >
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Telefono</label>
                                        <input type="text" name="telefono_emp_carga" id="telefono_emp_carga" class="form-control"
-                                       autofocus  value="{{old('telefono_emp_carga', $servicio->cargas->empresaCarga['telefono'])}}">
+                                       autofocus  value="{{old('telefono_emp_carga', $servicio->cargas->empresaTransporte['telefono'])}}">
                                    </div>
                                </div>
-                               <input type="text" name="id_emp_carga" id="id_emp_carga" class="form-control" hidden autofocus  value="{{old('id_emp_carga', $servicio->cargas->empresaCarga['id'])}}">
+                               <input type="text" name="id_emp_carga" id="id_emp_carga" class="form-control" hidden autofocus  value="{{old('id_emp_carga', $servicio->cargas->empresaTransporte['id'])}}">
                             </div>
                         </div>
                     </div>
@@ -547,6 +547,87 @@
 
                     <div class="card mb-4">
                         <div class="card-body ">
+                            <h6>Entrega Final</h6>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                       <label>Fecha</label>
+                                       <input type="date" name="fecha_entrega_final" id="fecha_entrega_final" class="form-control"
+                                       autofocus value="{{ date('Y-m-d', strtotime($servicio->entregas->fecha)) }}" >
+                                   </div>
+                               </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                       <label>Hora</label>
+                                       <select class="form-control" name="hora_entrega_final" id="hora_entrega_final">
+                                            <option value="09:00 am" @if ($servicio->entregas->hora === "09:00 am" || old('hora_entrega_final') === "09:00 am") selected @endif >09:00 am</option>
+                                            <option value="10:00 am" @if ($servicio->entregas->hora === "10:00 am" || old('hora_entrega_final') === "10:00 am") selected @endif>10:00 am</option>
+                                            <option value="11:00 am" @if ($servicio->entregas->hora === "11:00 am" || old('hora_entrega_final') === "11:00 am") selected @endif>11:00 am</option>
+                                            <option value="12:00 am" @if ($servicio->entregas->hora === "12:00 am" || old('hora_entrega_final') === "12:00 am") selected @endif>12:00 am</option>
+                                            <option value="13:00 pm" @if ($servicio->entregas->hora === "13:00 pm" || old('hora_entrega_final') === "13:00 pm") selected @endif>13:00 pm</option>
+                                            <option value="14:00 pm" @if ($servicio->entregas->hora === "14:00 pm" || old('hora_entrega_final') === "14:00 pm") selected @endif>14:00 pm</option>
+                                            <option value="15:00 pm" @if ($servicio->entregas->hora === "15:00 pm" || old('hora_entrega_final') === "15:00 pm") selected @endif>15:00 pm</option>
+                                            <option value="16:00 pm" @if ($servicio->entregas->hora === "16:00 pm" || old('hora_entrega_final') === "16:00 pm") selected @endif>16:00 pm</option>
+                                            <option value="17:00 pm" @if ($servicio->entregas->hora === "17:00 pm" || old('hora_entrega_final') === "17:00 pm") selected @endif>17:00 pm</option>
+                                            <option value="18:00 pm" @if ($servicio->entregas->hora === "18:00 pm" || old('hora_entrega_final') === "18:00 pm") selected @endif>18:00 pm</option>
+                                            <option value="19:00 pm" @if ($servicio->entregas->hora === "19:00 pm" || old('hora_entrega_final') === "19:00 pm") selected @endif>19:00 pm</option>
+                                            <option value="20:00 pm" @if ($servicio->entregas->hora === "20:00 pm" || old('hora_entrega_final') === "20:00 pm") selected @endif>20:00 pm</option>
+                                            <option value="21:00 pm" @if ($servicio->entregas->hora === "21:00 pm" || old('hora_entrega_final') === "21:00 pm") selected @endif>21:00 pm</option>
+                                        </select>
+                                   </div>
+                               </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nombre de la Empresa</label>
+                                        <div class="input-field">
+                                          <input type="text" name="empresa_final" id="empresa_final" class="form-control" autofocus autocomplete="off" value="{{old('empresa_final', $servicio->entregas->empresaTransporte['nombre'])}}">
+                                        </div>
+                                    </div>
+                               </div>
+
+                                                
+                               <div class="col-md-1 col-sm-2">
+                                   <div class="form-group">
+                                        <div class="text-center col-md-12 col-sm-12">
+                                            <a href="" class="btn bg-gradient-secondary w-100 mt-4 mb-0"><i class="ni ni-fat-add"></i></a>
+                                        </div>
+                                    </div>
+                               </div>
+
+                               <div class="col-md-3 col-sm-12">
+                                   <div class="form-group">
+                                       <label>Contacto</label>
+                                       <input type="text" name="contacto_emp_final" id="contacto_emp_final" class="form-control"
+                                       autofocus value="{{old('contacto_emp_final', $servicio->entregas->empresaTransporte['contacto'])}}">
+                                   </div>
+                               </div>
+                               <div class="col-md-4 col-sm-12">
+                                   <div class="form-group">
+                                       <label>Telefono</label>
+                                       <input type="text" name="telefono_emp_final" id="telefono_emp_final" class="form-control"
+                                       autofocus value="{{old('telefono_emp_final', $servicio->entregas->empresaTransporte['telefono'])}}">
+                                   </div>
+                               </div>
+                            </div>
+                            <div class="row">
+                               <div class="col-md-12 col-sm-12" >
+                                   <div class="form-group">
+                                        <label>Dirección de Entrega</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="lugar_final_entrega" id="lugar_final_entrega"  type="text" autofocus value="{{old('lugar_final_entrega', $servicio->entregas->lugar_entrega)}}">
+                                        </div>
+                                    </div>
+                               </div>
+                               
+                               <input type="text" name="id_emp_entrega" id="id_emp_entrega" class="form-control" hidden autofocus >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body ">
                             <h6>Información de Servicio</h6>
                             <div class="row">
                                 <div class="col-md-4 col-sm-12" >
@@ -622,8 +703,8 @@
                                 <div class="col-md-4 col-sm-12" >
                                    <div class="form-group">
                                         <label>Descripción de la Mercancía</label>
-                                        <div class="input-group mb-4">
-                                          <input class="form-control" name="descripcion_mercancia" id="descripcion_mercancia"  type="text" autofocus value="{{old('descripcion_mercancia', $servicio->detalle->descripcion_mercancia)}}">
+                                        <div class="input-field">
+                                          <input class="form-control" name="descripcion_mercancia" id="descripcion_mercancia"  type="text" autofocus value="{{old('descripcion_mercancia', $servicio->detalle->desc_mercaderia['descripcion_mercaderia'])}}">
                                         </div>
                                     </div>
                                </div>
@@ -632,7 +713,7 @@
                                    <div class="form-group">
                                         <label>Fracción Arancelaria</label>
                                         <div class="input-group mb-4">
-                                          <input class="form-control" name="fraccion_arancelaria" id="fraccion_arancelaria"  type="text" autofocus value="{{old('fraccion_arancelaria', $servicio->detalle->fraccion_arancelaria)}}">
+                                          <input class="form-control" name="fraccion_arancelaria" id="fraccion_arancelaria"  type="text" autofocus value="{{old('descripcion_mercancia', $servicio->detalle->desc_mercaderia['fraccion_arancelaria'])}}">
                                         </div>
                                     </div>
                                </div>
@@ -646,7 +727,8 @@
                                     </div>
                                </div>
                            
-
+                               <input type="text" name="id_descrip_merc" id="id_descrip_merc" class="form-control"  autofocus hidden>
+                               
                             </div>
                         </div>
                     </div>
@@ -714,7 +796,7 @@
         $(document).ready(function(){
           $.ajax({
             type: 'get',
-            url:'{!!URL::to('findEmpresaCarga')!!}',
+            url:'{!!URL::to('findEmpresa')!!}',
             success:function(response){
                 var empresaCargaArray = response;
                 var dataEmpCarga = {};
@@ -729,7 +811,7 @@
                       data: dataEmpCarga,
                       limit:5,
                       onAutocomplete:function(reqdata){
-                        $('#direccion_emp_carga').val(dataEmpCarga2[reqdata]['direccion']);
+                        $('#direccion_emp_carga').val(dataEmpCarga2[reqdata]['domicilio']);
                         $('#contacto_emp_carga').val(dataEmpCarga2[reqdata]['contacto']);
                         $('#telefono_emp_carga').val(dataEmpCarga2[reqdata]['telefono']);
                         $('#id_emp_carga').val(dataEmpCarga2[reqdata]['id']);
@@ -865,6 +947,65 @@
                         $('#contacto_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['contacto']);
                         $('#telefono_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['telefono']);
                         $('#id_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+    <!-- Descripción Mercaderia -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findDescMerc')!!}',
+            success:function(response){
+                var descMercaderiaArray = response;
+                var dataDescMercaderia = {};
+                var dataDescMercaderia2 = {};
+                for (var i = 0; i < descMercaderiaArray.length; i++){
+                    dataDescMercaderia[descMercaderiaArray[i].descripcion_mercaderia] = null;
+                    dataDescMercaderia2[descMercaderiaArray[i].descripcion_mercaderia] = descMercaderiaArray[i];
+                }
+             
+                 $('input#descripcion_mercancia').autocomplete({
+                      data: dataDescMercaderia,
+                      limit:3,
+                      onAutocomplete:function(reqdata){
+                        $('#fraccion_arancelaria').val(dataDescMercaderia2[reqdata]['fraccion_arancelaria']);
+                        $('#id_descrip_merc').val(dataDescMercaderia2[reqdata]['id']);
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+    <!-- Empresa de Entrega Final -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findEmpresa')!!}',
+            success:function(response){
+                var empresaEntregaArray = response;
+                var dataEmpEntrega = {};
+                var dataEmpEntrega2 = {};
+                for (var i = 0; i < empresaEntregaArray.length; i++){
+                    dataEmpEntrega[empresaEntregaArray[i].nombre] = null;
+                    dataEmpEntrega2[empresaEntregaArray[i].nombre] = empresaEntregaArray[i];
+
+                }
+             
+                 $('input#empresa_final').autocomplete({
+                      data: dataEmpEntrega,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        $('#contacto_emp_final').val(dataEmpEntrega2[reqdata]['contacto']);
+                        $('#telefono_emp_final').val(dataEmpEntrega2[reqdata]['telefono']);
+                        $('#id_emp_entrega').val(dataEmpEntrega2[reqdata]['id']);
                  
                       }
                     });

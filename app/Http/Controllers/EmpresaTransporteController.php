@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EmpresaRecolectora;
+use App\Models\EmpresaTransporte;
 use Illuminate\Http\Request;
 
-class EmpresaRecolectoraController extends Controller
+class EmpresaTransporteController extends Controller
 {
     public function getEmpresa(){
-        $p = EmpresaRecolectora::all();
+        $p = EmpresaTransporte::all();
         return response()->json($p);
     }
     /**
@@ -48,7 +48,7 @@ class EmpresaRecolectoraController extends Controller
      * @param  \App\Models\EmpresaRecolectora  $empresaRecolectora
      * @return \Illuminate\Http\Response
      */
-    public function show(EmpresaRecolectora $empresaRecolectora)
+    public function show(EmpresaTransporte $empresaTransporte)
     {
         //
     }
@@ -56,10 +56,10 @@ class EmpresaRecolectoraController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EmpresaRecolectora  $empresaRecolectora
+     * @param  \App\Models\EmpresaTransporte  $empresaRecolectora
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmpresaRecolectora $empresaRecolectora)
+    public function edit(EmpresaTransporte $empresaTransporte)
     {
         //
     }
@@ -68,10 +68,10 @@ class EmpresaRecolectoraController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EmpresaRecolectora  $empresaRecolectora
+     * @param  \App\Models\EmpresaTransporte  $empresaTransporte
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmpresaRecolectora $empresaRecolectora)
+    public function update(Request $request, EmpresaTransporte $empresaTransporte)
     {
         //
     }
@@ -79,10 +79,10 @@ class EmpresaRecolectoraController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EmpresaRecolectora  $empresaRecolectora
+     * @param  \App\Models\EmpresaTransporte  $empresaTransporte
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmpresaRecolectora $empresaRecolectora)
+    public function destroy(EmpresaTransporte $empresaTransporte)
     {
         //
     }

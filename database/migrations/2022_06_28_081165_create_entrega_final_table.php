@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEntregaInicioTable extends Migration
+class CreateEntregaFinalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreateEntregaInicioTable extends Migration
      */
     public function up()
     {
-        Schema::create('entrega_inicio', function (Blueprint $table) {
+        Schema::create('entrega_final', function (Blueprint $table) {
             $table->id();
             $table->date('fecha')->nullable();
             $table->string('hora', 20)->nullable();
-            $table->string('tipo_transporte', 30)->nullable();
-            $table->string('lugar_carga', 50)->nullable();
+            $table->string('lugar_entrega', 200)->nullable();
             $table->unsignedBigInteger('servicio_id')->nullable();
-            $table->unsignedBigInteger('emp_carga_id')->nullable();
+            $table->unsignedBigInteger('emp_transporte_id')->nullable();
             $table->foreign('servicio_id')
                     ->references('id')
                     ->on('servicios')->onDelete('cascade');
-            $table->foreign('emp_carga_id')
+            $table->foreign('emp_transporte_id')
                     ->references('id')
-                    ->on('empresa_carga')->onDelete('set null');
+                    ->on('empresa_transporte')->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -38,6 +37,6 @@ class CreateEntregaInicioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entrega_inicio');
+        Schema::dropIfExists('entrega_final');
     }
 }

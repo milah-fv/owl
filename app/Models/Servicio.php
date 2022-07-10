@@ -38,11 +38,20 @@ class Servicio extends Model
     public function cargas(){
         return $this->hasOne(EntregaInicio::class);
     }
+    public function entregas(){
+        return $this->hasOne(EntregaFinal::class);
+    }
     //hasMany
     public function detalle(){
         return $this->hasOne(ServicioDetalles::class);
     }
     
+    protected function Codigo(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+        );
+    }
 
     //Relación muchos a muchos
     /*public function recolecciones(){

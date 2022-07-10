@@ -89,7 +89,7 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-12">
                        <div class="form-group">
-                            <label>Nombre de Empresa Recolectora</label>
+                            <label>Nombre de Empresa</label>
                             <div class="input-field">
                               
                               <input type="text" name="empresa_recolectora" id="empresa_recolectora" class="form-control" autofocus autocomplete="off">
@@ -109,7 +109,7 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-12">
                        <div class="form-group">
-                           <label>Domicilio de la Empresa Recolectora</label>
+                           <label>Domicilio</label>
                            <input type="text" name="domicilio_recoleccion" id="domicilio_recoleccion" class="form-control"
                            autofocus >
                        </div>
@@ -501,6 +501,87 @@
         <hr>
         <div class="card mb-4">
             <div class="card-body ">
+                <h6>Entrega Final</h6>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                           <label>Fecha</label>
+                           <input type="date" name="fecha_entrega_final" id="fecha_entrega_final" class="form-control"
+                           autofocus value="{{ isset($fecha->fecha) ? $fecha->fecha: old('fecha') }}" >
+                       </div>
+                   </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                           <label>Hora</label>
+                           <select class="form-control" name="hora_entrega_final">
+                                <option value="09:00 am">09:00 am</option>
+                                <option value="10:00 am">10:00 am</option>
+                                <option value="11:00 am">11:00 am</option>
+                                <option value="12:00 am">12:00 am</option>
+                                <option value="13:00 pm">13:00 pm</option>
+                                <option value="14:00 pm">14:00 pm</option>
+                                <option value="15:00 pm">15:00 pm</option>
+                                <option value="16:00 pm">16:00 pm</option>
+                                <option value="17:00 pm">17:00 pm</option>
+                                <option value="18:00 pm">18:00 pm</option>
+                                <option value="19:00 pm">19:00 pm</option>
+                                <option value="20:00 pm">20:00 pm</option>
+                                <option value="21:00 pm">21:00 pm</option>
+                            </select>
+                       </div>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Nombre de la Empresa</label>
+                            <div class="input-field">
+                              <input type="text" name="empresa_final" id="empresa_final" class="form-control" autofocus autocomplete="off">
+                            </div>
+                        </div>
+                   </div>
+
+                                    
+                   <div class="col-md-1 col-sm-2">
+                       <div class="form-group">
+                            <div class="text-center col-md-12 col-sm-12">
+                                <a href="" class="btn bg-gradient-secondary w-100 mt-4 mb-0"><i class="ni ni-fat-add"></i></a>
+                            </div>
+                        </div>
+                   </div>
+
+                   <div class="col-md-3 col-sm-12">
+                       <div class="form-group">
+                           <label>Contacto</label>
+                           <input type="text" name="contacto_emp_final" id="contacto_emp_final" class="form-control"
+                           autofocus >
+                       </div>
+                   </div>
+                   <div class="col-md-4 col-sm-12">
+                       <div class="form-group">
+                           <label>Telefono</label>
+                           <input type="text" name="telefono_emp_final" id="telefono_emp_final" class="form-control"
+                           autofocus >
+                       </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-12 col-sm-12" >
+                       <div class="form-group">
+                            <label>Dirección de Entrega</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="lugar_final_entrega" id="lugar_final_entrega"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                   
+                   <input type="text" name="id_emp_entrega" id="id_emp_entrega" class="form-control" hidden autofocus >
+                </div>
+            </div>
+        </div>
+    
+        <div class="card mb-4">
+            <div class="card-body ">
                 <h6>Información de Servicio</h6>
                 <div class="row">
                     <div class="col-md-4 col-sm-12" >
@@ -576,8 +657,8 @@
                     <div class="col-md-4 col-sm-12" >
                        <div class="form-group">
                             <label>Descripción de la Mercancía</label>
-                            <div class="input-group mb-4">
-                              <input class="form-control" name="descripcion_mercancia" id="descripcion_mercancia"  type="text" autofocus>
+                            <div class="input-field">
+                              <input type="text" name="descripcion_mercancia" id="descripcion_mercancia" class="form-control" autofocus autocomplete="off">
                             </div>
                         </div>
                    </div>
@@ -586,10 +667,12 @@
                        <div class="form-group">
                             <label>Fracción Arancelaria</label>
                             <div class="input-group mb-4">
-                              <input class="form-control" name="fraccion_arancelaria" id="fraccion_arancelaria"  type="text" autofocus>
+                              <input type="text" name="fraccion_arancelaria" id="fraccion_arancelaria" class="form-control" autofocus>
                             </div>
                         </div>
                    </div>
+
+                   <input type="text" name="id_descrip_merc" id="id_descrip_merc" class="form-control"  autofocus hidden>
 
                    <div class="col-md-4 col-sm-12" >
                        <div class="form-group">
@@ -622,7 +705,7 @@
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Empresa Recolectora -->
+    <!-- Empresa Recoleccion -->
     <script type="text/javascript">
         $(document).ready(function(){
           //console.log('holi');
@@ -664,7 +747,7 @@
         $(document).ready(function(){
           $.ajax({
             type: 'get',
-            url:'{!!URL::to('findEmpresaCarga')!!}',
+            url:'{!!URL::to('findEmpresa')!!}',
             success:function(response){
                 var empresaCargaArray = response;
                 var dataEmpCarga = {};
@@ -679,7 +762,7 @@
                       data: dataEmpCarga,
                       limit:5,
                       onAutocomplete:function(reqdata){
-                        $('#direccion_emp_carga').val(dataEmpCarga2[reqdata]['direccion']);
+                        $('#direccion_emp_carga').val(dataEmpCarga2[reqdata]['domicilio']);
                         $('#contacto_emp_carga').val(dataEmpCarga2[reqdata]['contacto']);
                         $('#telefono_emp_carga').val(dataEmpCarga2[reqdata]['telefono']);
                         $('#id_emp_carga').val(dataEmpCarga2[reqdata]['id']);
@@ -766,12 +849,14 @@
             type: 'get',
             url:'{!!URL::to('findImportador')!!}',
             success:function(response){
+                //console.log(response);
                 var importadorArray = response;
                 var dataImportador = {};
                 var dataImportador2 = {};
                 for (var i = 0; i < importadorArray.length; i++){
                     dataImportador[importadorArray[i].nombre] = null;
                     dataImportador2[importadorArray[i].nombre] = importadorArray[i];
+
                 }
              
                  $('input#nombre_importador').autocomplete({
@@ -815,6 +900,66 @@
                         $('#contacto_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['contacto']);
                         $('#telefono_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['telefono']);
                         $('#id_ag_ad_importacion').val(dataAgenteAdImportacion2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+    <!-- Descripción Mercaderia -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findDescMerc')!!}',
+            success:function(response){
+                var descMercaderiaArray = response;
+                var dataDescMercaderia = {};
+                var dataDescMercaderia2 = {};
+                for (var i = 0; i < descMercaderiaArray.length; i++){
+                    dataDescMercaderia[descMercaderiaArray[i].descripcion_mercaderia] = null;
+                    dataDescMercaderia2[descMercaderiaArray[i].descripcion_mercaderia] = descMercaderiaArray[i];
+                }
+             
+                 $('input#descripcion_mercancia').autocomplete({
+                      data: dataDescMercaderia,
+                      limit:3,
+                      onAutocomplete:function(reqdata){
+                        $('#fraccion_arancelaria').val(dataDescMercaderia2[reqdata]['fraccion_arancelaria']);
+                        $('#id_descrip_merc').val(dataDescMercaderia2[reqdata]['id']);
+                        
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+
+    <!-- Empresa de Entrega Final -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findEmpresa')!!}',
+            success:function(response){
+                var empresaEntregaArray = response;
+                var dataEmpEntrega = {};
+                var dataEmpEntrega2 = {};
+                for (var i = 0; i < empresaEntregaArray.length; i++){
+                    dataEmpEntrega[empresaEntregaArray[i].nombre] = null;
+                    dataEmpEntrega2[empresaEntregaArray[i].nombre] = empresaEntregaArray[i];
+
+                }
+             
+                 $('input#empresa_final').autocomplete({
+                      data: dataEmpEntrega,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        $('#contacto_emp_final').val(dataEmpEntrega2[reqdata]['contacto']);
+                        $('#telefono_emp_final').val(dataEmpEntrega2[reqdata]['telefono']);
+                        $('#id_emp_entrega').val(dataEmpEntrega2[reqdata]['id']);
                  
                       }
                     });

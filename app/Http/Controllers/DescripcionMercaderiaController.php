@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EmpresaCarga;
+use App\Models\DescripcionMercaderia;
 use Illuminate\Http\Request;
 
-class EmpresaCargaController extends Controller
+class DescripcionMercaderiaController extends Controller
 {
-    public function getEmpresa(){
-        $p = EmpresaCarga::all();
+    public function getDescripcionMercaderia(){
+        $p = DescripcionMercaderia::all();
         return response()->json($p);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,10 +46,10 @@ class EmpresaCargaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EmpresaCarga  $empresaCarga
+     * @param  \App\Models\DescripcionMercaderia  $descripcionMercaderia
      * @return \Illuminate\Http\Response
      */
-    public function show(EmpresaCarga $empresaCarga)
+    public function show(DescripcionMercaderia $descripcionMercaderia)
     {
         //
     }
@@ -56,10 +57,10 @@ class EmpresaCargaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EmpresaCarga  $empresaCarga
+     * @param  \App\Models\DescripcionMercaderia  $descripcionMercaderia
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmpresaCarga $empresaCarga)
+    public function edit(DescripcionMercaderia $descripcionMercaderia)
     {
         //
     }
@@ -68,10 +69,10 @@ class EmpresaCargaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EmpresaCarga  $empresaCarga
+     * @param  \App\Models\DescripcionMercaderia  $descripcionMercaderia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmpresaCarga $empresaCarga)
+    public function update(Request $request, DescripcionMercaderia $descripcionMercaderia)
     {
         //
     }
@@ -79,10 +80,10 @@ class EmpresaCargaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EmpresaCarga  $empresaCarga
+     * @param  \App\Models\DescripcionMercaderia  $descripcionMercaderia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmpresaCarga $empresaCarga)
+    public function destroy(DescripcionMercaderia $descripcionMercaderia)
     {
         //
     }

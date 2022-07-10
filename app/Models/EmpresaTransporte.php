@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmpresaRecolectora extends Model
+class EmpresaTransporte extends Model
 {
     use HasFactory;
-    protected $table = 'empresa_recolectora';
+    protected $table = 'empresa_transporte';
     protected $fillable = [
         'id', 'nombre', 'domicilio', 'contacto', 'telefono',
     ];
@@ -17,7 +17,13 @@ class EmpresaRecolectora extends Model
         return $this->belongsToMany(Servicio::class);
     } */
     // Relación uno a muchos
-    public function recolecciones(){
+    public function transportes(){
         return $this->hasMany(Recoleccion::class);
+    }
+    public function transportesCarga(){
+        return $this->hasMany(EntregaInicio::class);
+    }
+    public function transportesFinal(){
+        return $this->hasMany(EntregaFinal::class);
     }
 }

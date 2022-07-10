@@ -11,11 +11,11 @@ class Recoleccion extends Model
     use HasFactory;
     protected $table = 'recoleccion';
     protected $fillable = [
-        'id', 'fecha', 'hora', 'tipo_transporte', 'servicio_id', 'emp_recolectora_id', 'direccion',
+        'id', 'fecha', 'hora', 'tipo_transporte', 'servicio_id', 'emp_transporte_id', 'direccion',
     ];
 
-    public function empresaRecolectora(){
-        return $this->belongsTo(EmpresaRecolectora::class, 'emp_recolectora_id');
+    public function empresaTransporte(){
+        return $this->belongsTo(EmpresaTransporte::class, 'emp_transporte_id');
     }
     /*public function servicio(){
         return $this->belongsTo(Servicio::class);

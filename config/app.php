@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
     ],
@@ -238,6 +239,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         //'Date' => Jenssegers\Date\Date::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

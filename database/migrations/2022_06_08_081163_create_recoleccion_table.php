@@ -20,13 +20,13 @@ class CreateRecoleccionTable extends Migration
             $table->string('tipo_transporte', 30)->nullable();
             $table->string('direccion', 200)->nullable();
             $table->unsignedBigInteger('servicio_id')->nullable();
-            $table->unsignedBigInteger('emp_recolectora_id')->nullable();
+            $table->unsignedBigInteger('emp_transporte_id')->nullable();
             $table->foreign('servicio_id')
                     ->references('id')
                     ->on('servicios')->onDelete('cascade');
-            $table->foreign('emp_recolectora_id')
+            $table->foreign('emp_transporte_id')
                     ->references('id')
-                    ->on('empresa_recolectora')->onDelete('set null');
+                    ->on('empresa_transporte')->onDelete('set null');
             $table->timestamps();
         });
     }

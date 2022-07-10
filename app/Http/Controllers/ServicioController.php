@@ -8,8 +8,9 @@ use App\Models\Servicio;
 use App\Models\Serie;
 use App\Models\Recoleccion;
 use App\Models\EntregaInicio;
+use App\Models\EntregaFinal;
 use App\Models\ServicioDetalles;
-
+use PDF;
 
 
 class ServicioController extends Controller
@@ -42,8 +43,9 @@ class ServicioController extends Controller
             $servicio->serie;
             $servicio->estado;
             $servicio->recolecciones;
-            $servicio->recolecciones->empresaRecolectora;
+            $servicio->recolecciones->empresaTransporte;
             $servicio->cargas;
+            $servicio->entregas;
             $servicio->detalle;
             //$servicio->fecha = $servicio->fecha->format('d/m/Y');
         });
@@ -90,7 +92,7 @@ class ServicioController extends Controller
         $recoleccion->fecha = $request->fecha_recoleccion;
         $recoleccion->hora = $request->hora_recoleccion;
         $recoleccion->tipo_transporte = $request->tipo_transporte_recoleccion;
-        $recoleccion->emp_recolectora_id = $request->id_emp_recolectora;
+        $recoleccion->emp_transporte_id = $request->id_emp_recolectora;
         //$recoleccion->direccion = $request->dirección_recoleccion;
         $meServicio->recolecciones()->save($recoleccion);
 
@@ -99,8 +101,15 @@ class ServicioController extends Controller
         $entregaInicio->hora = $request->hora_entrega_inicio;
         $entregaInicio->tipo_transporte = $request->tipo_transporte_entrega;
         $entregaInicio->lugar_carga = $request->lugar_carga_entrega;
-        $entregaInicio->emp_carga_id = $request->id_emp_carga;
+        $entregaInicio->emp_transporte_id = $request->id_emp_carga;
         $meServicio->cargas()->save($entregaInicio);
+
+        $entregaFinal = new EntregaFinal;
+        $entregaFinal->fecha = $request->fecha_entrega_final;
+        $entregaFinal->hora = $request->hora_entrega_final;
+        $entregaFinal->lugar_entrega = $request->lugar_final_entrega;
+        $entregaFinal->emp_transporte_id = $request->id_emp_entrega;
+        $meServicio->entregas()->save($entregaFinal);
 
         $servicioDetalle = new ServicioDetalles;
         $servicioDetalle->nro_pedido_cliente = $request->nro_pedido;
@@ -110,8 +119,7 @@ class ServicioController extends Controller
         $servicioDetalle->peso_neto = $request->peso_mercancia;
         $servicioDetalle->volumen = $request->volumen_mercancia;
         $servicioDetalle->pallets = $request->pallets;
-        $servicioDetalle->descripcion_mercancia = $request->descripcion_mercancia;
-        $servicioDetalle->fraccion_arancelaria = $request->fraccion_arancelaria;
+        $servicioDetalle->descripcion_merc_id = $request->id_descrip_merc;
         $servicioDetalle->regimen_aduanero = $request->regimen_aduanero;
         $meServicio->detalle()->save($servicioDetalle);
 
@@ -168,14 +176,20 @@ class ServicioController extends Controller
                 'fecha' => $request->fecha_recoleccion,
                 'hora' => $request->hora_recoleccion,
                 'tipo_transporte' => $request->tipo_transporte_recoleccion,
-                'emp_recolectora_id' => $request->id_emp_recolectora,
+                'emp_transporte_id' => $request->id_emp_recolectora,
             ]);
         $servicio->cargas->update([
                 'fecha' => $request->fecha_entrega_inicio,
                 'hora' => $request->hora_entrega_inicio,
                 'tipo_transporte' => $request->tipo_transporte_entrega,
                 'lugar_carga' => $request->lugar_carga_entrega,
-                'emp_carga_id' => $request->id_emp_carga,
+                'emp_transporte_id' => $request->id_emp_carga,
+            ]);
+        $servicio->entregas->update([
+                'fecha' => $request->fecha_entrega_final,
+                'hora' => $request->hora_entrega_final,
+                'lugar_entrega' => $request->lugar_final_entrega,
+                'emp_transporte_id' => $request->id_emp_entrega,
             ]);
         $servicio->detalle->update([
                 'nro_pedido_cliente' => $request->nro_pedido,
@@ -185,8 +199,8 @@ class ServicioController extends Controller
                 'peso_neto' => $request->peso_mercancia,
                 'volumen' => $request->volumen_mercancia,
                 'pallets' => $request->pallets,
-                'descripcion_mercancia' => $request->descripcion_mercancia,
-                'fraccion_arancelaria' => $request->fraccion_arancelaria,
+                'descripcion_merc_id' => $request->id_descrip_merc,
+                //'fraccion_arancelaria' => $request->fraccion_arancelaria,
                 'regimen_aduanero' => $request->regimen_aduanero,
             ]);
         toast('Servicio actualizado correctamente!','success');
@@ -203,5 +217,28 @@ class ServicioController extends Controller
     public function destroy(Servicio $servicio)
     {
         //
+    }
+
+    public function pdfInstrucciones($id)
+    {
+        $servicio = Servicio::findOrFail($id);
+        $series = Serie::all();
+        $pdf = PDF::loadview('pdf.carta_instrucciones', ['servicio' => $servicio, 'series' => $series]);
+        return $pdf->stream('Instrucciones_'.$servicio->id);
+    }
+    public function pdfPorte($id)
+    {
+        $servicio = Servicio::findOrFail($id);
+        $series = Serie::all();
+        $pdf = PDF::loadview('pdf.carta_porte', ['servicio' => $servicio, 'series' => $series]);
+        return $pdf->stream('Porte_'.$servicio->id);
+    }
+    public function pdfManifiesto($id)
+    {
+        $servicio = Servicio::findOrFail($id);
+        $series = Serie::all();
+        $pdf = PDF::loadview('pdf.carta_manifiesto', ['servicio' => $servicio, 'series' => $series]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('Manifiesto_'.$servicio->id);
     }
 }
