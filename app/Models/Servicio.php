@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Servicio extends Model
 {
     use HasFactory;
@@ -46,12 +47,13 @@ class Servicio extends Model
         return $this->hasOne(ServicioDetalles::class);
     }
     
-    protected function Codigo(): Attribute
+    protected function id(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => ucfirst($value),
+          // get: fn ($value) => ucfirst($value),
         );
     }
+    
 
     //Relación muchos a muchos
     /*public function recolecciones(){

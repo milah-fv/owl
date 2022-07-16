@@ -51,3 +51,7 @@ Route::get('servicios/instrucciones/pdf/{id}', [ServicioController::class, 'pdfI
 Route::get('servicios/porte/pdf/{id}', [ServicioController::class, 'pdfPorte'])->name('pdf_porte');
 Route::get('servicios/manifiesto/pdf/{id}', [ServicioController::class, 'pdfManifiesto'])->name('pdf_manifiesto');
 
+Route::get('info', function () {
+    return view('info');
+});
+

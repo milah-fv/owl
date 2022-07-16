@@ -224,14 +224,14 @@ class ServicioController extends Controller
         $servicio = Servicio::findOrFail($id);
         $series = Serie::all();
         $pdf = PDF::loadview('pdf.carta_instrucciones', ['servicio' => $servicio, 'series' => $series]);
-        return $pdf->stream('Instrucciones_'.$servicio->id);
+        return $pdf->stream('Instrucciones_'.$servicio->id.'.pdf');
     }
     public function pdfPorte($id)
     {
         $servicio = Servicio::findOrFail($id);
         $series = Serie::all();
         $pdf = PDF::loadview('pdf.carta_porte', ['servicio' => $servicio, 'series' => $series]);
-        return $pdf->stream('Porte_'.$servicio->id);
+        return $pdf->stream('Porte_'.$servicio->id.'.pdf');
     }
     public function pdfManifiesto($id)
     {
@@ -239,6 +239,6 @@ class ServicioController extends Controller
         $series = Serie::all();
         $pdf = PDF::loadview('pdf.carta_manifiesto', ['servicio' => $servicio, 'series' => $series]);
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->stream('Manifiesto_'.$servicio->id);
+        return $pdf->stream('Manifiesto_'.$servicio->id.'.pdf');
     }
 }
