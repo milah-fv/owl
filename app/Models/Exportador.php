@@ -22,7 +22,7 @@ class Exportador extends Model
 
     protected function nombre(): Attribute
     {
-        return Attribute::make(
+        return new Attribute(
             get: fn ($value) => ucfirst($value),
         );
     }
