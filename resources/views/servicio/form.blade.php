@@ -129,7 +129,7 @@
                    <div class="col-md-1 col-sm-2">
                        <div class="form-group">
                             <div class="text-center col-md-12 col-sm-12">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalMessage" class="btn bg-gradient-secondary w-100 mt-4 mb-0">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalMessage1" class="btn bg-gradient-secondary w-100 mt-4 mb-0">
                                 <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span></a>
                             </div>
                         </div>

@@ -149,7 +149,7 @@
   			<td valign=top style="text-align: center;"><b>TOTAL DE CAJAS</b></td>
   			<td valign=top style="text-align: center;" id = "totalcajas"> <mark></mark></td>
   			<td valign=top></td>
-  			<td valign=top style="text-align: center; padding-right: 20px;"> <mark>20.995,00</mark></td>
+  			<td valign=top style="text-align: center; padding-right: 20px;"> <mark></mark></td>
   		</tr>
   	</table>
   	<br>
@@ -187,7 +187,7 @@
   			
   		</tr>
   		<tr>
-  			<td valign=top style="text-align: center;"><mark>22 /10/2022</mark></td>
+  			<td valign=top style="text-align: center;"><?php echo date("d-m-Y");?></td>
   			<td valign=top style="text-align: center;">CIUDAD HIDALGO, CHIAPAS</td>
   			
   		</tr>

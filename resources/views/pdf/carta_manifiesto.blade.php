@@ -53,7 +53,7 @@
   			<td valign=top class="grid_sombreado"><b>CAAT</b></td>
   			<td valign=top style="padding-top: 0"> {{ isset($servicio->transporte->caat) ? $servicio->transporte->caat: old('caat') }} </td>
   			<td valign=top class="grid_sombreado"><b>FECHA</b></td>
-  			<td valign=top style="padding-top: 0"><mark>22 /10/2022</mark></td>
+  			<td valign=top style="padding-top: 0"><?php echo date("d-m-Y");?></td>
   		</tr>
   		<tr>
   			<td valign=top class="grid_sombreado"><b>MEDIO DE TRANSPORTE</b></td>
@@ -90,9 +90,9 @@
   		@endforeach
   		<tr class="grid_sombreado">
   			<td valign=top colspan="3" style="text-align: center;"><b>TOTALES</b></td>
-  			<td valign=top style="text-align: center"><b><mark>{{ $servicio->detalle->pallets }}</mark></b></td>
+  			<td valign=top style="text-align: center"><b><mark></mark></b></td>
   			<td></td>
-  			<td valign=top style="text-align: center"><b><mark>2.915,00</mark></b></td>
+  			<td valign=top style="text-align: center"><b><mark></mark></b></td>
   		</tr>
 
   	</table>
