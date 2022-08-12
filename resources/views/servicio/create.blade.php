@@ -40,7 +40,7 @@
 
 <div class="container-fluid py-4">
     <div class="row mt-4">
-        <form action="{{url('/servicios')}}" method="post" enctype="multipart/form-data">
+        <form action="{{url('/servicios')}}" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
            @csrf
 
 

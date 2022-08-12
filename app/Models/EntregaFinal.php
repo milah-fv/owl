@@ -10,7 +10,7 @@ class EntregaFinal extends Model
     use HasFactory;
     protected $table = 'entrega_final';
     protected $fillable = [
-        'id', 'fecha', 'hora', 'lugar_entrega', 'servicio_id', 'emp_transporte_id',
+        'id', 'fecha', 'hora', 'lugar_entrega', 'lugar_destino', 'servicio_id', 'emp_transporte_id',
     ];
 
     public function empresaTransporte(){

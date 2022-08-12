@@ -7,9 +7,20 @@ use Illuminate\Http\Request;
 use App\Http\Requests\EmpleadoRequest;
 use Image;
 Use Alert;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use App\Models\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class EmpleadoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +30,7 @@ class EmpleadoController extends Controller
     {
         //$datos['empleados'] = Empleado::paginate(500);
         //return view('empleado.index', $datos);
-        $empleados = Empleado::all();
+        $empleados = User::all();
         return view('empleado.index',[
             'empleados' => $empleados
         ]);
@@ -42,16 +53,28 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EmpleadoRequest $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email|max:150|unique:empleados,email',
+            'email' => 'required|email|max:150|unique:users,email',
+            'name' => 'required|max:150',
+            'password' => 'required',
+            'apellidos' => 'required|max:150',
+            'celular' => 'required|max:50',
+            'direccion' => 'max:250',
         ],
         [
             'email.required' => 'El email es requerido.',
             'email.max' => 'El maximo de caracteres es 150',
             'email.unique' => 'Este email ya esta registrado',
-
+            'name.required' => 'El nombre es requerido.',
+            'name.max' => 'El maximo de caracteres es 150',
+            'password.required' => 'La contraseña es requerida.',
+            'apellidos.required' => 'Los apellidos son requeridos.',
+            'apellidos.max' => 'El maximo de caracteres es 150',
+            'celular.required' => 'El nro de telefono es requerido.',
+            'celular.max' => 'El maximo de caracteres es 50',
+            'direccion.max' => 'El maximo de caracteres es 250',
         ]);
 
         $fileNameCover = null;
@@ -60,16 +83,17 @@ class EmpleadoController extends Controller
             $fileNameCover = $cover->hashName();
             Image::make($cover)->resize(500,500)->save('img/empleados/' .$fileNameCover);
         }
-        $datosEmpleado = Empleado::create([
+        $datosEmpleado = User::create([
             'img' => $fileNameCover,
-            'nombre' => $request->nombre,
-            'apellidos' => $request->apellidos,
-            'direccion' => $request->direccion,
+            'name' => $request->name,
             'email' => $request->email,
+            'password' => Hash::make($request->password),  
+            'apellidos' => $request->apellidos,
             'celular' => $request->celular,
-            //'actived' => 1,
-            //'password' => bcrypt($request->password),
-
+            'cargo' => $request->cargo,
+            'direccion' => $request->direccion,
+            
+             
         ]);
         //Empleado::insert($datosEmpleado);
         //return response()->json($datosEmpleado);
@@ -97,7 +121,7 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        $empleado = Empleado::findOrFail($id);
+        $empleado = User::findOrFail($id);
 
         return view('empleado.edit', compact('empleado'));
     }
@@ -109,17 +133,30 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(EmpleadoRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $empleado = Empleado::findOrFail($id);
+        $empleado = User::findOrFail($id);
         
         $this->validate($request, [
-            'email' => 'required|email|max:150|unique:empleados,email,'.$empleado->id,
+            'email' => 'required|email|max:150|unique:users,email,'.$empleado->id,
+            'name' => 'required|max:150',
+            
+            'apellidos' => 'required|max:150',
+            'celular' => 'required|max:50',
+            'direccion' => 'max:250',
         ],
         [
             'email.required' => 'El email es requerido.',
             'email.max' => 'El maximo de caracteres es 150',
             'email.unique' => 'Este email ya esta registrado',
+            'name.required' => 'El nombre es requerido.',
+            'name.max' => 'El maximo de caracteres es 150',
+           
+            'apellidos.required' => 'Los apellidos son requeridos.',
+            'apellidos.max' => 'El maximo de caracteres es 150',
+            'celular.required' => 'El nro de telefono es requerido.',
+            'celular.max' => 'El maximo de caracteres es 50',
+            'direccion.max' => 'El maximo de caracteres es 250',
 
         ]);
 
@@ -134,22 +171,16 @@ class EmpleadoController extends Controller
             }
             $empleado->img = $fileNameCover;
         }
-        $empleado->nombre = $request->nombre;
-        $empleado->apellidos = $request->apellidos;
-        $empleado->direccion = $request->direccion;
+        $empleado->name = $request->name;
         $empleado->email = $request->email;
+        $empleado->password = Hash::make($request->password);
+        $empleado->apellidos = $request->apellidos;
         $empleado->celular = $request->celular;
-        /*
-        if($request->password != null)   
-        {
-            $user->password = bcrypt($request->password);            
-        }*/
+        $empleado->cargo = $request->cargo;
+        $empleado->direccion = $request->direccion;
         $empleado->save();
-        // $user->roles()->sync($request->roles);
         toast('Empleado actualizado correctamente!','success');
-        //Alert::success('Empleado actualizado correctamente');
         return redirect("/empleados");
-
 
     }
 
@@ -161,17 +192,12 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-        /*$empleado = Empleado::findOrFail($id);
-        if(Storage::delete('public/'.$empleado->img)){
-            Empleado::destroy($id);
-        } */
-        $empleado = Empleado::findOrFail($id);
+        $empleado = User::findOrFail($id);
         if ($empleado->img != null) 
             {
-                Empleado::destroy($id);
+                User::destroy($id);
             }
-
-        Empleado::destroy($id);
+        User::destroy($id);
         return redirect('empleados');
     }
 }

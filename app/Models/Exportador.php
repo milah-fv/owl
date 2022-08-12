@@ -11,7 +11,8 @@ class Exportador extends Model
     use HasFactory;
     protected $table = 'exportadores';
     protected $fillable = [
-        'nombre', 'rfc', 'domicilio', 'contacto','telefono', 'pais_origen', 'ciudad_origen',
+        'nombre', 'rfc', 'domicilio', 'contacto','telefono',
+         //'pais_origen', 'ciudad_origen',
     ];
 
 
@@ -26,10 +27,10 @@ class Exportador extends Model
             get: fn ($value) => ucfirst($value),
         );
     }
-    protected function id(): Attribute
+    /*protected function id(): Attribute
     {
         return new Attribute(
             get: fn ($value) => str_pad($value, 5, '0', STR_PAD_LEFT),
         );
-    }
+    } */
 }

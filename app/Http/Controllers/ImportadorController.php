@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ImportadorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function getEmpresa(){
         $p = Importador::all();
         return response()->json($p);

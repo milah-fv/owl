@@ -18,7 +18,7 @@ class CreateRecoleccionTable extends Migration
             $table->date('fecha')->nullable();
             $table->string('hora', 20)->nullable();
             $table->string('tipo_transporte', 30)->nullable();
-            $table->string('direccion', 200)->nullable();
+            $table->string('lugar_origen', 100)->nullable();
             $table->unsignedBigInteger('servicio_id')->nullable();
             $table->unsignedBigInteger('emp_transporte_id')->nullable();
             $table->foreign('servicio_id')

@@ -10,7 +10,7 @@ class DescripcionMercaderia extends Model
     use HasFactory;
     protected $table = 'descripcion_mercaderia';
     protected $fillable = [
-        'descripcion_mercaderia', 'fraccion_arancelaria', 
+        'id', 'descripcion_mercaderia', 'fraccion_arancelaria', 
     ];
 
     //Relacion uno a muchos

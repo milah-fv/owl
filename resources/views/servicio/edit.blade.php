@@ -50,11 +50,28 @@
 
                     <div class="card mb-4">
                         <div class="card-body ">
-                            <h4>Editar Servicio</h4>
+                            <h4>Editar Servicio </h4>
                             <hr>
                             
                             <div class="row">
-                                <div class="col-md-6 col-sm-12">
+                                <div class="col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                       <label>Estado</label>
+                                        <div class="form-group">
+                                            <select class="form-control" id="estados" name="estados" required>
+                                            <!--Select seleccionando el valor -->
+                                                @foreach ($estados as $estado)
+                                                <option select value="{{ $estado->id }}" 
+                                                        @if ($servicio->estado_id === $estado->id || old('estados') === $estado->id) selected @endif
+                                                >
+                                                {{ $estado->estado }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                   </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
                                     <div class="form-group">
                                        <label>Fecha</label>
                                        <input type="date" name="fecha_servicio" id="fecha_servicio" class="form-control"
@@ -65,19 +82,27 @@
                                    </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label>N° de Serie</label>
-                                        <select class="form-control" id="series" name="series" required>
-                                            <!--Select seleccionando el valor -->
-                                            @foreach ($series as $serie)
-                                                <option select value="{{ $serie->id }}" 
-                                                    @if ($servicio->serie_id === $serie->id || old('series') === $serie->id) selected @endif
-                                                >
-                                                {{ $serie->serie }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                   </div>
+                                    <label>N° de Serie</label>
+                                        <div class="row">
+                                        <div class="col-md-4 col-sm-6">   
+                                            <div class="form-group">
+                                               
+                                                <select class="form-control" id="series" name="series" required style="text-align: center;">
+                                                    <!--Select seleccionando el valor -->
+                                                    @foreach ($series as $serie)
+                                                        <option select value="{{ $serie->id }}" 
+                                                            @if ($servicio->serie_id === $serie->id || old('series') === $serie->id) selected @endif
+                                                        >
+                                                        {{ $serie->serie }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-6 form-group">
+                                            <input class="form-control" style="text-align: center;" value="- {{$servicio->id}}" disabled>
+                                        </div>
+                                    </div>
                                </div>
                             </div>
 
@@ -142,7 +167,8 @@
                                         <label>Nombre de Empresa</label>
                                         <div class="input-field">
                                           
-                                          <input type="text" name="empresa_recolectora" id="empresa_recolectora" class="form-control" autofocus autocomplete="off" value="{{old('empresa_recolectora', $servicio->recolecciones->empresaTransporte['nombre'])}}">
+                                          <input type="text" name="empresa_recolectora" id="empresa_recolectora" class="form-control" autofocus autocomplete="off" value="{{ isset($servicio->recolecciones->empresaTransporte['nombre']) ? $servicio->recolecciones->empresaTransporte['nombre']: old('empresa_recolectora') }}">
+
                                         </div>
                                     </div>
                                </div>
@@ -155,30 +181,42 @@
                                     </div>
                                </div>
 
+                               <div class="col-md-3 col-sm-12" >
+                                   <div class="form-group">
+                                        <label>Lugar de Origen</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="lugar_origen" id="lugar_origen"  type="text" autofocus placeholder="Ciudad, País" value="{{old('lugar_origen', $servicio->recolecciones->lugar_origen)}}">
+                                        </div>
+                                    </div>
+                               </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Domicilio</label>
                                        <input type="text" name="domicilio_recoleccion" id="domicilio_recoleccion" class="form-control"
-                                       autofocus value="{{old('domicilio_recoleccion', $servicio->recolecciones->empresaTransporte['domicilio'])}}">
+                                       autofocus value="{{ isset($servicio->recolecciones->empresaTransporte['domicilio']) ? $servicio->recolecciones->empresaTransporte['domicilio']: old('domicilio_recoleccion') }}">
+
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Contacto</label>
                                        <input type="text" name="contacto_recoleccion" id="contacto_recoleccion" class="form-control"
-                                       autofocus value="{{old('contacto_recoleccion', $servicio->recolecciones->empresaTransporte['contacto'])}}">
+                                       autofocus value="{{ isset($servicio->recolecciones->empresaTransporte['contacto']) ? $servicio->recolecciones->empresaTransporte['contacto']: old('contacto_recoleccion') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Telefono</label>
                                        <input type="text" name="telefono_recoleccion" id="telefono_recoleccion" class="form-control"
-                                       autofocus value="{{old('telefono_recoleccion', $servicio->recolecciones->empresaTransporte['telefono'])}}">
+                                       autofocus value="{{ isset($servicio->recolecciones->empresaTransporte['telefono']) ? $servicio->recolecciones->empresaTransporte['telefono']: old('telefono_recoleccion') }}">
+
                                    </div>
                                </div>
-                                <input type="text" name="id_emp_recolectora" id="id_emp_recolectora" class="form-control" hidden autofocus value="{{old('id_emp_recolectora', $servicio->recolecciones->empresaTransporte['id'])}}">
+                                <input type="text" name="id_emp_recolectora" id="id_emp_recolectora" class="form-control" hidden autofocus value="{{ isset($servicio->recolecciones->empresaTransporte['id']) ? $servicio->recolecciones->empresaTransporte['id']: old('id_emp_recolectora') }}">
+
                             </div>
                         </div>
                     </div>
@@ -241,7 +279,7 @@
                                     <div class="form-group">
                                         <label>Nombre de la Empresa</label>
                                         <div class="input-field">
-                                          <input type="text" name="empresa_carga" id="empresa_carga" class="form-control" autofocus autocomplete="off" value="{{old('empresa_carga', $servicio->cargas->empresaTransporte['nombre'])}}">
+                                          <input type="text" name="empresa_carga" id="empresa_carga" class="form-control" autofocus autocomplete="off" value="{{ isset($servicio->cargas->empresaTransporte['nombre']) ? $servicio->cargas->empresaTransporte['nombre']: old('empresa_carga') }}">
                                         </div>
                                     </div>
                                </div>
@@ -270,24 +308,25 @@
                                    <div class="form-group">
                                        <label>Dirección</label>
                                        <input type="text" name="direccion_emp_carga" id="direccion_emp_carga" class="form-control"
-                                       autofocus  value="{{old('direccion_emp_carga', $servicio->cargas->empresaTransporte['domicilio'])}}">
+                                       autofocus  value="{{ isset($servicio->cargas->empresaTransporte['domicilio']) ? $servicio->cargas->empresaTransporte['domicilio']: old('direccion_emp_carga') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Contacto</label>
                                        <input type="text" name="contacto_emp_carga" id="contacto_emp_carga" class="form-control"
-                                       autofocus  value="{{old('contacto_emp_carga', $servicio->cargas->empresaTransporte['contacto'])}}" >
+                                       autofocus  value="{{ isset($servicio->cargas->empresaTransporte['contacto']) ? $servicio->cargas->empresaTransporte['contacto']: old('contacto_emp_carga') }}" >
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Telefono</label>
                                        <input type="text" name="telefono_emp_carga" id="telefono_emp_carga" class="form-control"
-                                       autofocus  value="{{old('telefono_emp_carga', $servicio->cargas->empresaTransporte['telefono'])}}">
+                                       autofocus  value="{{ isset($servicio->cargas->empresaTransporte['telefono']) ? $servicio->cargas->empresaTransporte['telefono']: old('telefono_emp_carga') }}">
+
                                    </div>
                                </div>
-                               <input type="text" name="id_emp_carga" id="id_emp_carga" class="form-control" hidden autofocus  value="{{old('id_emp_carga', $servicio->cargas->empresaTransporte['id'])}}">
+                               <input type="text" name="id_emp_carga" id="id_emp_carga" class="form-control" hidden autofocus  value="{{ isset($servicio->cargas->empresaTransporte['id']) ? $servicio->cargas->empresaTransporte['id']: old('id_emp_carga') }}">
                             </div>
                         </div>
                     </div>
@@ -302,7 +341,8 @@
                                    <div class="form-group">
                                         <label>Nombre del Exportador</label>
                                         <div class="input-field">
-                                          <input type="text" name="nombre_exportador" id="nombre_exportador" class="form-control" autofocus autocomplete="off" value="{{old('nombre_exportador', $servicio->exportador->nombre)}}">
+                                          <input type="text" name="nombre_exportador" id="nombre_exportador" class="form-control" autofocus autocomplete="off" value="{{ isset($servicio->exportador->nombre) ? $servicio->exportador->nombre: old('nombre_exportador') }}">
+
                                         </div>
                                     </div>
                                </div>
@@ -319,53 +359,55 @@
                                    <div class="form-group">
                                         <label>RFC</label>
                                         <div class="input-group mb-4">
-                                          <input class="form-control" name="rfc_exportador" id="rfc_exportador"  type="text" autofocus value="{{old('rfc_exportador', $servicio->exportador->rfc)}}">
+                                          <input class="form-control" name="rfc_exportador" id="rfc_exportador"  type="text" autofocus value="{{ isset($servicio->exportador->rfc) ? $servicio->exportador->rfc: old('rfc_exportador') }}">
+
                                         </div>
                                     </div>
                                </div>
-
+                               <!--
                                <div class="col-md-2 col-sm-12" >
                                    <div class="form-group">
                                         <label>País de Origen</label>
                                         <div class="input-group mb-4">
-                                          <input class="form-control" name="pais_origen" id="pais_origen"  type="text" autofocus value="{{old('pais_origen', $servicio->exportador->pais_origen )}}">
+                                          <input class="form-control" name="pais_origen" id="pais_origen"  type="text" autofocus value="">
                                         </div>
                                     </div>
-                               </div>
-
+                               </div> -->
+                                <!--
                                <div class="col-md-2 col-sm-12" >
                                    <div class="form-group">
                                         <label>Ciudad de Origen</label>
                                         <div class="input-group mb-4">
-                                          <input class="form-control" name="ciudad_origen" id="ciudad_origen"  type="text" autofocus value="{{old('ciudad_origen', $servicio->exportador->ciudad_origen )}}">
+                                          <input class="form-control" name="ciudad_origen" id="ciudad_origen"  type="text" autofocus value="">
                                         </div>
                                     </div>
                                </div>
-
+                                -->
                             </div>
                             <div class="row">
                                 <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Domicilio</label>
                                        <input type="text" name="domicilio_exportador" id="domicilio_exportador" class="form-control"
-                                       autofocus value="{{old('domicilio_exportador', $servicio->exportador->domicilio )}}">
+                                       autofocus value="{{ isset($servicio->exportador->domicilio) ? $servicio->exportador->domicilio: old('domicilio_exportador') }}">
+
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Contacto</label>
                                        <input type="text" name="contacto_exportador" id="contacto_exportador" class="form-control"
-                                       autofocus value="{{old('contacto_exportador', $servicio->exportador->contacto )}}">
+                                       autofocus value="{{ isset($servicio->exportador->contacto) ? $servicio->exportador->contacto: old('contacto_exportador') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Telefono</label>
                                        <input type="text" name="telefono_exportador" id="telefono_exportador" class="form-control"
-                                       autofocus value="{{old('telefono_exportador', $servicio->exportador->telefono )}}">
+                                       autofocus value="{{ isset($servicio->exportador->telefono) ? $servicio->exportador->telefono: old('telefono_exportador') }}">
                                    </div>
                                </div>
-                               <input type="text" name="id_exportador" id="id_exportador" class="form-control" hidden autofocus value="{{old('id_exportador', $servicio->exportador->id )}}">
+                               <input type="text" name="id_exportador" id="id_exportador" class="form-control" hidden autofocus value="{{ isset($servicio->exportador->id) ? $servicio->exportador->id: old('id_exportador') }}">
                             </div>
                         </div>
                     </div>
@@ -379,7 +421,7 @@
                                    <div class="form-group">
                                         <label>Nombre del Agente Aduanal de Exportación</label>
                                         <div class="input-field">
-                                          <input type="text" name="nombre_ag_ad_exportacion" id="nombre_ag_ad_exportacion" class="form-control" autofocus autocomplete="off" value="{{old('nombre_ag_ad_exportacion', $servicio->agente_ad_exportacion->nombre)}}">
+                                          <input type="text" name="nombre_ag_ad_exportacion" id="nombre_ag_ad_exportacion" class="form-control" autofocus autocomplete="off" value="{{ isset($servicio->agente_ad_exportacion->nombre) ? $servicio->agente_ad_exportacion->nombre: old('nombre_ag_ad_exportacion') }}">
                                         </div>
                                     </div>
                                </div>
@@ -396,7 +438,7 @@
                                    <div class="form-group">
                                         <label>NIT</label>
                                         <div class="input-group mb-4">
-                                          <input class="form-control" name="nit_ag_ad_exportacion" id="nit_ag_ad_exportacion"  type="text" autofocus value="{{old('nit_ag_ad_exportacion', $servicio->agente_ad_exportacion->nit)}}">
+                                          <input class="form-control" name="nit_ag_ad_exportacion" id="nit_ag_ad_exportacion"  type="text" autofocus value="{{ isset($servicio->agente_ad_exportacion->nit) ? $servicio->agente_ad_exportacion->nit: old('nit_ag_ad_exportacion') }}">
                                         </div>
                                     </div>
                                </div>
@@ -407,24 +449,24 @@
                                    <div class="form-group">
                                        <label>Domicilio</label>
                                        <input type="text" name="domicilio_ag_ad_exportacion" id="domicilio_ag_ad_exportacion" class="form-control"
-                                       autofocus value="{{old('domicilio_ag_ad_exportacion', $servicio->agente_ad_exportacion->domicilio)}}">
+                                       autofocus value="{{ isset($servicio->agente_ad_exportacion->domicilio) ? $servicio->agente_ad_exportacion->domicilio: old('domicilio_ag_ad_exportacion') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Contacto</label>
                                        <input type="text" name="contacto_ag_ad_exportacion" id="contacto_ag_ad_exportacion" class="form-control"
-                                       autofocus value="{{old('contacto_ag_ad_exportacion', $servicio->agente_ad_exportacion->contacto)}}">
+                                       autofocus value="{{ isset($servicio->agente_ad_exportacion->contacto) ? $servicio->agente_ad_exportacion->contacto: old('contacto_ag_ad_exportacion') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Telefono</label>
                                        <input type="text" name="telefono_ag_ad_exportacion" id="telefono_ag_ad_exportacion" class="form-control"
-                                       autofocus value="{{old('telefono_ag_ad_exportacion', $servicio->agente_ad_exportacion->telefono)}}">
+                                       autofocus value="{{ isset($servicio->agente_ad_exportacion->telefono) ? $servicio->agente_ad_exportacion->telefono: old('telefono_ag_ad_exportacion') }}">
                                    </div>
                                </div>
-                               <input type="text" name="id_ag_ad_exportacion" id="id_ag_ad_exportacion" class="form-control" hidden  autofocus value="{{old('id_ag_ad_exportacion', $servicio->agente_ad_exportacion->id)}}">
+                               <input type="text" name="id_ag_ad_exportacion" id="id_ag_ad_exportacion" class="form-control" hidden  autofocus value="{{ isset($servicio->agente_ad_exportacion->id) ? $servicio->agente_ad_exportacion->id: old('id_ag_ad_exportacion') }}">
                             </div>
                         </div>
                     </div>
@@ -437,7 +479,7 @@
                                    <div class="form-group">
                                         <label>Nombre del Importador</label>
                                         <div class="input-field">
-                                          <input type="text" name="nombre_importador" id="nombre_importador" class="form-control" autofocus autocomplete="off" value="{{old('nombre_importador', $servicio->importador->nombre)}}">
+                                          <input type="text" name="nombre_importador" id="nombre_importador" class="form-control" autofocus autocomplete="off" value="{{ isset($servicio->importador->nombre) ? $servicio->importador->nombre: old('nombre_importador') }}">
                                         </div>
                                     </div>
                                </div>
@@ -454,7 +496,7 @@
                                    <div class="form-group">
                                         <label>NIT</label>
                                         <div class="input-group mb-4">
-                                          <input class="form-control" name="nit_importador" id="nit_importador"  type="text" autofocus value="{{old('nit_importador', $servicio->importador->nit)}}">
+                                          <input class="form-control" name="nit_importador" id="nit_importador"  type="text" autofocus value="{{ isset($servicio->importador->nit) ? $servicio->importador->nit: old('nit_importador') }}">
                                         </div>
                                     </div>
                                </div>
@@ -464,24 +506,24 @@
                                    <div class="form-group">
                                        <label>Domicilio</label>
                                        <input type="text" name="domicilio_importador" id="domicilio_importador" class="form-control"
-                                       autofocus value="{{old('domicilio_importador', $servicio->importador->domicilio)}}">
+                                       autofocus value="{{ isset($servicio->importador->domicilio) ? $servicio->importador->domicilio: old('domicilio_importador') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Contacto</label>
                                        <input type="text" name="contacto_importador" id="contacto_importador" class="form-control"
-                                       autofocus value="{{old('contacto_importador', $servicio->importador->contacto)}}">
+                                       autofocus value="{{ isset($servicio->importador->contacto) ? $servicio->importador->contacto: old('contacto_importador') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Telefono</label>
                                        <input type="text" name="telefono_importador" id="telefono_importador" class="form-control"
-                                       autofocus value="{{old('telefono_importador', $servicio->importador->telefono)}}">
+                                       autofocus value="{{ isset($servicio->importador->telefono) ? $servicio->importador->telefono: old('telefono_importador') }}">
                                    </div>
                                </div>
-                               <input type="text" name="id_importador" id="id_importador" class="form-control" hidden autofocus value="{{old('id_importador', $servicio->importador->id)}}">
+                               <input type="text" name="id_importador" id="id_importador" class="form-control" hidden autofocus value="{{ isset($servicio->importador->id) ? $servicio->importador->id: old('id_importador') }}">
                             </div>
                         </div>
                     </div>
@@ -494,7 +536,7 @@
                                    <div class="form-group">
                                         <label>Nombre del Agente Aduanal de Importación</label>
                                         <div class="input-field">
-                                          <input type="text" name="nombre_ag_ad_importacion" id="nombre_ag_ad_importacion" class="form-control" autofocus autocomplete="off" value="{{old('nombre_ag_ad_importacion', $servicio->agente_ad_importacion->nombre)}}">
+                                          <input type="text" name="nombre_ag_ad_importacion" id="nombre_ag_ad_importacion" class="form-control" autofocus autocomplete="off" value="{{ isset($servicio->agente_ad_importacion->nombre) ? $servicio->agente_ad_importacion->nombre: old('nombre_ag_ad_importacion') }}">
                                         </div>
                                     </div>
                                </div>
@@ -511,7 +553,7 @@
                                    <div class="form-group">
                                         <label>NIT</label>
                                         <div class="input-group mb-4">
-                                          <input class="form-control" name="nit_ag_ad_importacion" id="nit_ag_ad_importacion"  type="text" autofocus value="{{old('nit_ag_ad_importacion', $servicio->agente_ad_importacion->nit)}}">
+                                          <input class="form-control" name="nit_ag_ad_importacion" id="nit_ag_ad_importacion"  type="text" autofocus value="{{ isset($servicio->agente_ad_importacion->nit) ? $servicio->agente_ad_importacion->nit: old('nit_ag_ad_importacion') }}">
                                         </div>
                                     </div>
                                </div>
@@ -522,24 +564,24 @@
                                    <div class="form-group">
                                        <label>Domicilio</label>
                                        <input type="text" name="domicilio_ag_ad_importacion" id="domicilio_ag_ad_importacion" class="form-control"
-                                       autofocus value="{{old('domicilio_ag_ad_importacion', $servicio->agente_ad_importacion->domicilio)}}">
+                                       autofocus value="{{ isset($servicio->agente_ad_importacion->domicilio) ? $servicio->agente_ad_importacion->domicilio: old('domicilio_ag_ad_importacion') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Contacto</label>
                                        <input type="text" name="contacto_ag_ad_importacion" id="contacto_ag_ad_importacion" class="form-control"
-                                       autofocus value="{{old('contacto_ag_ad_importacion', $servicio->agente_ad_importacion->contacto)}}">
+                                       autofocus value="{{ isset($servicio->agente_ad_importacion->contacto) ? $servicio->agente_ad_importacion->contacto: old('contacto_ag_ad_importacion') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Telefono</label>
                                        <input type="text" name="telefono_ag_ad_importacion" id="telefono_ag_ad_importacion" class="form-control"
-                                       autofocus value="{{old('telefono_ag_ad_importacion', $servicio->agente_ad_importacion->telefono)}}">
+                                       autofocus value="{{ isset($servicio->agente_ad_importacion->telefono) ? $servicio->agente_ad_importacion->telefono: old('telefono_ag_ad_importacion') }}">
                                    </div>
                                </div>
-                               <input type="text" name="id_ag_ad_importacion" id="id_ag_ad_importacion" class="form-control" hidden autofocus value="{{old('id_ag_ad_importacion', $servicio->agente_ad_importacion->id)}}">
+                               <input type="text" name="id_ag_ad_importacion" id="id_ag_ad_importacion" class="form-control" hidden autofocus value="{{ isset($servicio->agente_ad_importacion->id) ? $servicio->agente_ad_importacion->id: old('id_ag_ad_importacion') }}">
                             </div>
                         </div>
                     </div>
@@ -582,7 +624,7 @@
                                     <div class="form-group">
                                         <label>Nombre de la Empresa</label>
                                         <div class="input-field">
-                                          <input type="text" name="empresa_final" id="empresa_final" class="form-control" autofocus autocomplete="off" value="{{old('empresa_final', $servicio->entregas->empresaTransporte['nombre'])}}">
+                                          <input type="text" name="empresa_final" id="empresa_final" class="form-control" autofocus autocomplete="off" value="{{ isset($servicio->entregas->empresaTransporte['nombre']) ? $servicio->entregas->empresaTransporte['nombre']: old('empresa_final') }}">
                                         </div>
                                     </div>
                                </div>
@@ -600,19 +642,19 @@
                                    <div class="form-group">
                                        <label>Contacto</label>
                                        <input type="text" name="contacto_emp_final" id="contacto_emp_final" class="form-control"
-                                       autofocus value="{{old('contacto_emp_final', $servicio->entregas->empresaTransporte['contacto'])}}">
+                                       autofocus value="{{ isset($servicio->entregas->empresaTransporte['contacto']) ? $servicio->entregas->empresaTransporte['contacto']: old('contacto_emp_final') }}">
                                    </div>
                                </div>
                                <div class="col-md-4 col-sm-12">
                                    <div class="form-group">
                                        <label>Telefono</label>
                                        <input type="text" name="telefono_emp_final" id="telefono_emp_final" class="form-control"
-                                       autofocus value="{{old('telefono_emp_final', $servicio->entregas->empresaTransporte['telefono'])}}">
+                                       autofocus value="{{ isset($servicio->entregas->empresaTransporte['telefono']) ? $servicio->entregas->empresaTransporte['telefono']: old('telefono_emp_final') }}">
                                    </div>
                                </div>
                             </div>
                             <div class="row">
-                               <div class="col-md-12 col-sm-12" >
+                               <div class="col-md-6 col-sm-12" >
                                    <div class="form-group">
                                         <label>Dirección de Entrega</label>
                                         <div class="input-group mb-4">
@@ -620,8 +662,16 @@
                                         </div>
                                     </div>
                                </div>
+                               <div class="col-md-6 col-sm-12" >
+                                   <div class="form-group">
+                                        <label>Lugar de Destino</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="lugar_destino" id="lugar_destino"  type="text" autofocus placeholder="Ciudad, País" value="{{old('lugar_destino', $servicio->entregas->lugar_destino)}}">
+                                        </div>
+                                    </div>
+                               </div>
                                
-                               <input type="text" name="id_emp_entrega" id="id_emp_entrega" class="form-control" hidden autofocus >
+                               <input type="text" name="id_emp_entrega" id="id_emp_entrega" class="form-control" hidden autofocus value="{{old('id_emp_entrega', $servicio->entregas->id)}}">
                             </div>
                         </div>
                     </div>
@@ -704,7 +754,7 @@
                                    <div class="form-group">
                                         <label>Descripción de la Mercancía</label>
                                         <div class="input-field">
-                                          <input class="form-control" name="descripcion_mercancia" id="descripcion_mercancia"  type="text" autofocus value="{{old('descripcion_mercancia', $servicio->detalle->desc_mercaderia['descripcion_mercaderia'])}}">
+                                          <input class="form-control" name="descripcion_mercancia" id="descripcion_mercancia"  type="text" autofocus value="{{ isset($servicio->detalle->desc_mercaderia['descripcion_mercaderia']) ? $servicio->detalle->desc_mercaderia['descripcion_mercaderia']: old('descripcion_mercancia') }}">
                                         </div>
                                     </div>
                                </div>
@@ -713,10 +763,12 @@
                                    <div class="form-group">
                                         <label>Fracción Arancelaria</label>
                                         <div class="input-group mb-4">
-                                          <input class="form-control" name="fraccion_arancelaria" id="fraccion_arancelaria"  type="text" autofocus value="{{old('descripcion_mercancia', $servicio->detalle->desc_mercaderia['fraccion_arancelaria'])}}">
+                                          <input class="form-control" name="fraccion_arancelaria" id="fraccion_arancelaria"  type="text" autofocus value="{{ isset($servicio->detalle->desc_mercaderia['fraccion_arancelaria']) ? $servicio->detalle->desc_mercaderia['fraccion_arancelaria']: old('fraccion_arancelaria') }}">
                                         </div>
                                     </div>
                                </div>
+
+                               <input type="text" name="id_descrip_merc" id="id_descrip_merc" class="form-control"  autofocus hidden value="{{ isset($servicio->detalle->desc_mercaderia['id']) ? $servicio->detalle->desc_mercaderia['id']: old('id_descrip_merc') }}">
 
                                <div class="col-md-4 col-sm-12" >
                                    <div class="form-group">
@@ -727,11 +779,243 @@
                                     </div>
                                </div>
                            
-                               <input type="text" name="id_descrip_merc" id="id_descrip_merc" class="form-control"  autofocus hidden>
+                               
                                
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="card mb-4">
+                        <div class="card-body ">
+                            <h6>Transporte</h6>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12" >
+                                    <div class="form-group">
+                                       <label>Medio de Transporte</label>
+                                       <select class="form-control" name="medio_transporte">
+                                            <option value="Terrestre" @if ($servicio->detalle->medio_transporte === "Terrestre" || old('medio_transporte') === "Terrestre") selected @endif >Terrestre</option>
+                                            <option value="Marítimo" @if ($servicio->detalle->medio_transporte === "Marítimo" || old('medio_transporte') === "Marítimo") selected @endif >Marítimo</option>
+                                            <option value="Aéreo" @if ($servicio->detalle->medio_transporte === "Aéreo" || old('medio_transporte') === "Aéreo") selected @endif >Aéreo</option>
+                                        </select>
+                                   </div>
+                               </div>
+                                <div class="col-md-4 col-sm-12" >
+                                    <div class="form-group">
+                                        <label>Aduana de Inicio</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="aduana_inicio" id="aduana_inicio"  type="text" autofocus value="{{old('aduana_inicio', $servicio->detalle->aduana_inicio)}}">
+                                        </div>
+                                    </div>
+                               </div>
+                               <div class="col-md-4 col-sm-12" >
+                                    <div class="form-group">
+                                        <label>Aduana de Ingreso</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="aduana_ingreso" id="aduana_ingreso"  type="text" autofocus value="{{old('aduana_ingreso', $servicio->detalle->aduana_ingreso)}}">
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body ">
+                            <h6>Transporte</h6>
+                            <div class="row">
+                                <div class="col-md-5 col-sm-12" >
+                                    <div class="form-group">
+                                       <label>Operador</label>
+                                        <div class="input-field">
+                                          <input class="form-control" name="operador" id="operador"  type="text" autofocus autocomplete="off" value="{{ isset($servicio->transporte->operador) ? $servicio->transporte->operador: old('operador') }}">
+                                        </div>
+                                   </div>
+                                   <input type="text" name="id_transporte" id="id_transporte" class="form-control"  autofocus hidden value="{{ isset($servicio->transporte->id) ? $servicio->transporte->id: old('id_transporte') }}">
+                                   
+                                </div>
+                                 <div class="col-md-1 col-sm-2">
+                                   <div class="form-group">
+                                        <div class="text-center col-md-12 col-sm-12">
+                                            <a href="" class="btn bg-gradient-secondary w-100 mt-4 mb-0"><i class="ni ni-fat-add"></i></a>
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12" >
+                                    <div class="form-group">
+                                       <label>Placas Tracto</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="placas_tracto" id="placas_tracto"  type="text" autofocus value="{{ isset($servicio->transporte->placas_tracto) ? $servicio->transporte->placas_tracto: old('placas_tracto') }}">
+                                        </div>
+                                   </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12" >
+                                    <div class="form-group">
+                                        <label>Licencia</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="licencia" id="licencia"  type="text" autofocus value="{{ isset($servicio->transporte->licencia) ? $servicio->transporte->licencia: old('licencia') }}">
+                                        </div>
+                                    </div>
+                               </div>
+                               <div class="col-md-3 col-sm-12" >
+                                    <div class="form-group">
+                                        <label>CAAT</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="caat" id="caat"  type="text" autofocus value="{{ isset($servicio->transporte->caat) ? $servicio->transporte->caat: old('caat') }}">
+                                        </div>
+                                    </div>
+                               </div>
+                               <div class="col-md-3 col-sm-12" >
+                                    <div class="form-group">
+                                        <label>Número ECO</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="nro_eco" id="nro_eco"  type="text" autofocus value="{{ isset($servicio->transporte->nro_eco) ? $servicio->transporte->nro_eco: old('nro_eco') }}">
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12" >
+                                    <div class="form-group">
+                                       <label>Capacidad</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="capacidad" id="capacidad"  type="text" autofocus value="{{ isset($servicio->transporte->capacidad) ? $servicio->transporte->capacidad: old('capacidad') }}">
+                                        </div>
+                                   </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12" >
+                                    <div class="form-group">
+                                        <label>Placas Caja</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="placa_cajas" id="placa_cajas"  type="text" autofocus value="{{ isset($servicio->transporte->placa_cajas) ? $servicio->transporte->placa_cajas: old('placa_cajas') }}">
+                                        </div>
+                                    </div>
+                               </div>
+                               <div class="col-md-3 col-sm-12" >
+                                    <div class="form-group">
+                                        <label>Transporte Afianzador</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="transporte_afianzador" id="transporte_afianzador" type="text" autofocus value="{{ isset($servicio->transporte->transporte_afianzador) ? $servicio->transporte->transporte_afianzador: old('transporte_afianzador') }}">
+                                        </div>
+                                    </div>
+                               </div>
+                               <div class="col-md-3 col-sm-12" >
+                                    <div class="form-group">
+                                        <label>Código Aduanero</label>
+                                        <div class="input-group mb-4">
+                                          <input class="form-control" name="codigo_aduanero" id="codigo_aduanero" type="text" autofocus value="{{ isset($servicio->transporte->codigo_aduanero) ? $servicio->transporte->codigo_aduanero: old('codigo_aduanero') }}">
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body ">
+                            <h6>Productos</h6>
+                            <div class="col-md-12 col-sm-12" >
+                               <div class="table-responsive" class="productos_tabla">
+                                    <table class="table align-items-center mb-0" id="lista" name="lista">
+                                        <thead>
+                                            <tr>
+                                            <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width=5% >N°</th> -->
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" width=10% >Factura</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" width=10% >Cajas</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" width=10% >Peso</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" width=50% >Descripción</th>
+                                            <th class="text-secondary opacity-7" width=10% ></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($servicio->productos as $prod)
+                                            <tr id="product0">
+                                            <!-- <th class="text-center">1</th> -->
+                                            <th><input class="form-control" name="producto_factura[]" id="producto_factura"  type="text" autofocus value="{{ isset($prod->factura) ? $prod->factura: old('producto_factura[]') }}"></th>
+                                            <th><input class="form-control" name="producto_cajas[]" id="producto_cajas"  type="text" autofocus value="{{ isset($prod->cajas) ? $prod->cajas: old('producto_cajas[]') }}"></th>
+                                            <th><input class="form-control" name="producto_peso[]" id="producto_peso"  type="text" autofocus placeholder="En Kg." value="{{ isset($prod->peso) ? $prod->peso: old('producto_peso[]') }}"></th>
+                                            <th><input class="form-control" name="producto_descripcion[]" id="producto_descripcion"  type="text" autofocus value="{{ isset($prod->contenido) ? $prod->contenido: old('producto_descripcion[]') }}"></th>
+                                            <td><a href="#" class="btn btn-link text-danger text-gradient px-3 mb-0"><i class="far fa-trash-alt me-2"></i></a></td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot style="background-color: #f0f0f0;">
+                                            <tr>
+                                            <th colspan="1" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" id="totalcajas"></th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" id="totalpeso"></th>
+                                            <th colspan="2" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>  
+                            <div class="row"> 
+                                <div class=" col-md-6 col-sm-12" >
+                                    <div class="form-group" style="float: left; ">
+                                        <div class="input-group mb-4">
+                                            <button class="btn bg-gradient-success w-100 mt-4 mb-0" id="add_row" type="button"><i class="fas fa-plus-circle"></i> Añadir Fila</button>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 ">
+                            <div class="card mb-4 ">
+                                <div class="card-body ">
+                                    <h6>Pagos</h6>
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-12" >
+                                            <div class="form-group">
+                                                <label>Flete</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-text">$</span>
+                                                  <input type="text"  class="monto form-control text-center" onchange="sumarMonto();" name="flete" id="flete" autofocus value="{{ isset($servicio->pago->flete) ? $servicio->pago->flete: old('flete') }}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-sm-12" >
+                                            <div class="form-group">
+                                                <label>Seguro</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-text">$</span>
+                                                  <input type="text"  class="monto form-control text-center" onchange="sumarMonto();" name="seguro" id="seguro" autofocus value="{{ isset($servicio->pago->seguro) ? $servicio->pago->seguro: old('seguro') }}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-11 col-sm-12" >
+                                        <div class="form-group">
+                                            <label>Total</label>
+                                            <div class="input-group"  >
+                                                <span class="input-group-text">$</span>
+                                                <input type="text" id="total" name="total" class="form-control text-center" readonly value="{{ isset($servicio->pago->total) ? $servicio->pago->total: old('total') }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 ">
+                            <div class="card mb-4">
+                                <div class="card-body ">
+                                    <h6>Otros Cargos</h6>
+                                    <div class="form-group">
+                                        <label>*Observaciones</label>
+                                        <div class="input-field">
+                                            <textarea class="form-control" id="observaciones" name="observaciones" rows="4" autofocus> {{ old('observaciones', $servicio->detalle->observaciones) }} </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="row ">
                         <div class="text-center col-md-3 col-sm-12">
@@ -1014,6 +1298,126 @@
         });
     </script>
 
+    <!-- Transporte -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findTransporte')!!}',
+            success:function(response){
+                var transporteArray = response;
+                var dataTransporte = {};
+                var dataTransporte2 = {};
+                for (var i = 0; i < transporteArray.length; i++){
+                    dataTransporte[transporteArray[i].operador] = null;
+                    dataTransporte2[transporteArray[i].operador] = transporteArray[i];
+
+                }
+             
+                 $('input#operador').autocomplete({
+                      data: dataTransporte,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        $('#placas_tracto').val(dataTransporte2[reqdata]['placas_tracto']);
+                        $('#licencia').val(dataTransporte2[reqdata]['licencia']);
+                        $('#caat').val(dataTransporte2[reqdata]['caat']);
+                        $('#nro_eco').val(dataTransporte2[reqdata]['nro_eco']);
+                        $('#capacidad').val(dataTransporte2[reqdata]['capacidad']);
+                        $('#placa_cajas').val(dataTransporte2[reqdata]['placa_cajas']);
+                        $('#transporte_afianzador').val(dataTransporte2[reqdata]['transporte_afianzador']);
+                        $('#codigo_aduanero').val(dataTransporte2[reqdata]['codigo_aduanero']);
+                        $('#id_transporte').val(dataTransporte2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+    <script>
+        var boton=document.getElementById('add_row');
+        var lista=document.getElementById('lista');
+        var data = [];
+        var cant = 1;
+        boton.addEventListener("click", agregar_producto);
+        function agregar_producto(){
+            var nrofila = cant+1;
+            data.push(
+                {
+                    "id": cant,
+                }
+            );
+            var id_row = 'product' + cant;
+            var fila = '<tr id=' + id_row + '><th><input class="form-control" name="producto_factura[]" id="producto_factura"  type="text" autofocus></th><th><input class="form-control" name="producto_cajas[]" id="producto_cajas"  type="text" autofocus></th><th><input class="form-control" name="producto_peso[]" id="producto_peso"  type="text" autofocus placeholder="En Kg."></th><th><input class="form-control" name="producto_descripcion[]" id="producto_descripcion"  type="text" autofocus></th><td><a href="#" class="btn btn-link text-danger text-gradient px-3 mb-0" onclick="eliminar('+ cant +')";><i class="far fa-trash-alt me-2"></i></a></td> </tr>';
+            //Agregar a la lista
+            $('#lista').append(fila);
+            cant++;
+            //sumar();
+            
+        }
+        function eliminar(row){
+            //remover la fila del html
+            $("#product"+row).remove();
+            var i = 0;
+            var pos = 0;
+            for(x of data){
+                if(x.id==row){
+                    pos = i;
+                }
+                i++;
+            }
+            data.splice(pos, 1);
+            //sumar();
+        }
+
+        function sumar(){
+            
+            var cajas = parseFloat(document.getElementById('producto_cajas').value);
+            var peso = parseFloat(document.getElementById('producto_peso').value);
+            var totalcajas = 0;
+            var totalpeso = 0;
+            for (x of data) {
+                totalcajas = totalcajas + x.cajas;
+            }
+            for (y of data) {
+                totalpeso = totalpeso + y.peso;
+            }
+            document.getElementById('totalcajas').innerHTML =  totalcajas;
+            document.getElementById('totalpeso').innerHTML =  totalpeso;
+        } 
+    </script>
+    <!--<script type="text/javascript">
+      let total1 = 0;
+      let celdascajas = document.querySelectorAll('td + td');
+      for(let i = 0; i < celdascajas.length; ++i){
+        total1 += parseFloat(celdascajas[i].firstChild.data);
+      }
+      console.log(total1);
+      let nuevaFila = document.createElement('tr');
+      let celdaTotal = document.createElement('td');
+      let textoCeldaTotal = document.createTextNode('Total: ');
+      celdaTotal.appendChild(textoCeldaTotal);
+      nuevaFila.appendChild(celdaTotal);
+      let celdaValorTotal = document.createElement('td');
+      let textoCeldaValorTotal = document.createTextNode(total1);
+      celdaValorTotal.appendChild(textoCeldaValorTotal);
+      nuevaFila.appendChild(celdaValorTotal);
+      document.getElementById('lista').appendChild(nuevaFila);
+    </script> -->
+    <script type="text/javascript">
+        /* Sumar dos números. */
+        function sumarMonto()
+        {
+          const $total = document.getElementById('total');
+          let subtotal = 0;
+          [ ...document.getElementsByClassName( "monto" ) ].forEach( function ( element ) {
+            if(element.value !== '') {
+              subtotal += parseFloat(element.value);
+            }
+          });
+          $total.value = subtotal;
+        }
+    </script>
 @endsection
 
 

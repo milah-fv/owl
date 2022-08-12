@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 
 class Servicio extends Model
@@ -11,7 +12,7 @@ class Servicio extends Model
     use HasFactory;
     protected $table = 'servicios';
     protected $fillable = [
-        'id', 'numero','codigo', 'fecha', 'estado_id', 'exportador_id', 'agente_exportacion_id', 'importador_id', 'agente_importacion_id', 'serie_id'
+        'id', 'numero','codigo', 'fecha', 'estado_id', 'exportador_id', 'agente_exportacion_id', 'importador_id', 'agente_importacion_id', 'serie_id', 'transporte_id'
     ];
 
     //Relacón uno a muchos (inversa)
@@ -33,6 +34,9 @@ class Servicio extends Model
     public function estado(){
         return $this->belongsTo(Estado::class);
     }
+    public function transporte(){
+        return $this->belongsTo(Transporte::class);
+    }
     public function recolecciones(){
         return $this->hasOne(Recoleccion::class);
     }
@@ -46,14 +50,21 @@ class Servicio extends Model
     public function detalle(){
         return $this->hasOne(ServicioDetalles::class);
     }
+    public function productos()
+    {
+        return $this->hasMany(Producto::class);
+    }
     
     protected function id(): Attribute
     {
-        return Attribute::make(
-          // get: fn ($value) => ucfirst($value),
+        return new Attribute(
+            get: fn ($value) => str_pad($value, 5, '0', STR_PAD_LEFT),
         );
     }
-    
+    public function pago()
+    {
+        return $this->hasOne(Pago::class);
+    }
 
     //Relación muchos a muchos
     /*public function recolecciones(){

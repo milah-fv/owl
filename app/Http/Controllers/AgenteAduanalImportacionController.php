@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class AgenteAduanalImportacionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getEmpresa(){
         $p = AgenteAduanalImportacion::all();
         return response()->json($p);

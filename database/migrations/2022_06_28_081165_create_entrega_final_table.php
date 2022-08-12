@@ -18,6 +18,7 @@ class CreateEntregaFinalTable extends Migration
             $table->date('fecha')->nullable();
             $table->string('hora', 20)->nullable();
             $table->string('lugar_entrega', 200)->nullable();
+            $table->string('lugar_destino', 100)->nullable();
             $table->unsignedBigInteger('servicio_id')->nullable();
             $table->unsignedBigInteger('emp_transporte_id')->nullable();
             $table->foreign('servicio_id')

@@ -60,9 +60,10 @@
             <table class="table align-items-center justify-content-center mb-0" id="importadores">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
+                  <th></th>
+                  <th width="5%" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
                   N°</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  <th width="25%" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   Nombre</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   NIT</th>
@@ -75,7 +76,7 @@
                   <th
                   class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   Teléfono</th>
-                  <th
+                  <th width="10%"
                   class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
                 Opciones</th>
 
@@ -85,18 +86,17 @@
                 @foreach( $importadores as $importador)
 
                 <tr>
+                  <td>{{$importador->updated_at}}</td>
                   <td  class="align-middle text-center">
-                    <p class="text-sm font-weight-bold mb-0">{{$importador->id}}</p>
+                    <p class="text-xs font-weight-bold mb-0">{{$importador->id}}</p>
                   </td>
                   <td>
                     <div class="my-auto">
-                      <h6 class="mb-0 text-sm">{{$importador->nombre}}</h6>
+                      <h6 class="mb-0 text-xs font-weight-bold">{{$importador->nombre}}</h6>
                     </div>
                   </td>
                   <td >
-                    <div class="my-auto">
-                      <p class="text-sm font-weight-bold mb-0">{{$importador->rfc}}</p>
-                    </div>
+                      <span class="text-xs font-weight-bold mb-0">{{$importador->nit}}</span>
                   </td>
                   <td>
                     <span class="text-xs font-weight-bold">{{$importador->domicilio}}</span>
@@ -111,13 +111,16 @@
                     <form action="{{ url('/importador/'.$importador->id) }}" method="post" class="formEliminar">
                       @csrf
                       {{method_field('DELETE')}}
-                      <a class="btn btn-link text-dark px-3 mb-0" href="{{ url('/importador/'.$importador->id.'/edit') }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Editar</a>
 
-                      <input type="hidden" name="eliminarValor" value="{{ $importador->id }}">
-                      <button type="submit" class="btn btn-link text-danger text-gradient px-3 mb-0 "  id="btnEliminar">
-                        <i class="far fa-trash-alt me-2"></i>Eliminar
+                      <!-- <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-eye text-dark me-2" aria-hidden="true"></i>Ver</a> -->
+                      <a title="Editar" class="btn btn-link text-dark px-3 mb-0" href="{{ url('/importador/'.$importador->id.'/edit') }}"  style="padding:0px; "><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i></a>
+
+                      <input  type="hidden" name="eliminarValor" value="{{ $importador->id }}">
+                      <button title="Eliminar" type="submit" class="btn btn-link text-danger text-gradient px-3 mb-0 "  style="padding:0px; " id="btnEliminar">
+                        <!-- onclick="return confirm ('¿Seguro que quiere eliminar este registro?')" -->
+                        <i class="far fa-trash-alt me-2"></i>
                       </button>
-                    </form> 
+                    </form>  
                   </td>
                 </tr>
                 @endforeach
@@ -164,6 +167,20 @@
               "previous": "<i class='fa fa-angle-left'></i>",
             }
         },
+        "order": [[ 0, "desc" ]], 
+        "columnDefs": [
+                { "orderable": true, "className": 'reorder', "targets": [1,2] },
+                { "orderable": false, "targets": '_all' },
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
+                },
+                { "targets":[0,1,2,5,6,7], "className": "desktop" },
+                { "targets":[0,1,2,7], "className": "tablet, mobile" },
+                { "targets":[3,4], "className": "none" },
+                { "orderable": false, "targets": [1,2] }
+            ],
       });
   </script>
   <script type="text/javascript">

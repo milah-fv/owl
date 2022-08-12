@@ -1,6 +1,7 @@
 @section('css')
 
 @endsection
+
 <div class="row">
    
     <div class="col-lg-11">
@@ -31,9 +32,36 @@
                             </select>
                        </div>
                    </div>
+
                 </div>
             </div>
         </div>
+        
+        <div class="card mb-4" >
+            <div class="card-body ">
+                <div class="nav-wrapper position-relative end-0">
+                  <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-2 active" data-bs-toggle="tab" href="#profile-tabs-icons" role="tab" aria-controls="preview" aria-selected="true">
+                      <i class="ni ni-badge text-sm me-2"></i> My Profile
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-2" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
+                        <i class="ni ni-laptop text-sm me-2"></i> Dashboard
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-2" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
+                        <i class="ni ni-laptop text-sm me-2"></i> Dashboard
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+        </div>  
+        
+
         <div class="card mb-4" >
             <div class="card-body ">
                 <h6>Recolección</h6>
@@ -93,6 +121,7 @@
                             <div class="input-field">
                               
                               <input type="text" name="empresa_recolectora" id="empresa_recolectora" class="form-control" autofocus autocomplete="off">
+
                             </div>
                         </div>
                    </div>
@@ -100,7 +129,18 @@
                    <div class="col-md-1 col-sm-2">
                        <div class="form-group">
                             <div class="text-center col-md-12 col-sm-12">
-                                <a href="" class="btn bg-gradient-secondary w-100 mt-4 mb-0"><i class="ni ni-fat-add"></i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalMessage" class="btn bg-gradient-secondary w-100 mt-4 mb-0">
+                                <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span></a>
+                            </div>
+                        </div>
+                   </div>
+
+
+                   <div class="col-md-3 col-sm-12" >
+                       <div class="form-group">
+                            <label>Lugar de Origen</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="lugar_origen" id="lugar_origen"  type="text" autofocus placeholder="Ciudad, País">
                             </div>
                         </div>
                    </div>
@@ -217,7 +257,7 @@
                        <div class="form-group">
                             <label>Lugar de Carga</label>
                             <div class="input-group mb-4">
-                              <input class="form-control" name="lugar_carga_entrega" id="lugar_carga_entrega"  type="text" autofocus>
+                              <input class="form-control" name="lugar_carga_entrega" id="lugar_carga_entrega"  type="text" autofocus placeholder="Ciudad, País">
                             </div>
                         </div>
                    </div>
@@ -279,7 +319,7 @@
                             </div>
                         </div>
                    </div>
-
+                   <!--
                    <div class="col-md-2 col-sm-12" >
                        <div class="form-group">
                             <label>País de Origen</label>
@@ -297,7 +337,7 @@
                             </div>
                         </div>
                    </div>
-
+                    -->
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-sm-12">
@@ -566,7 +606,7 @@
                    </div>
                 </div>
                 <div class="row">
-                   <div class="col-md-12 col-sm-12" >
+                   <div class="col-md-6 col-sm-12" >
                        <div class="form-group">
                             <label>Dirección de Entrega</label>
                             <div class="input-group mb-4">
@@ -574,7 +614,15 @@
                             </div>
                         </div>
                    </div>
-                   
+                   <div class="col-md-6 col-sm-12" >
+                       <div class="form-group">
+                            <label>Destino</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="lugar_destino" id="lugar_destino"  type="text" autofocus placeholder="Ciudad, País">
+                            </div>
+                        </div>
+                   </div>
+
                    <input type="text" name="id_emp_entrega" id="id_emp_entrega" class="form-control" hidden autofocus >
                 </div>
             </div>
@@ -690,6 +738,251 @@
 
         <div class="card mb-4">
             <div class="card-body ">
+                <h6>Transporte</h6>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12" >
+                        <div class="form-group">
+                           <label>Medio de Transporte</label>
+                           <select class="form-control" name="medio_transporte">
+                                <option value="Terrestre">Terrestre</option>
+                                <option value="Marítimo">Marítimo</option>
+                                <option value="Aéreo">Aéreo</option>
+                            </select>
+                       </div>
+                   </div>
+                    <div class="col-md-4 col-sm-12" >
+                        <div class="form-group">
+                            <label>Aduana de Inicio</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="aduana_inicio" id="aduana_inicio"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="col-md-4 col-sm-12" >
+                        <div class="form-group">
+                            <label>Aduana de Ingreso</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="aduana_ingreso" id="aduana_ingreso"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body ">
+                <h6>Transporte</h6>
+                <div class="row">
+                    <div class="col-md-5 col-sm-12" >
+                        <div class="form-group">
+                           <label>Operador</label>
+                            <div class="input-field">
+                              <input class="form-control" name="operador" id="operador"  type="text" autofocus autocomplete="off">
+                            </div>
+                       </div>
+                       <input type="text" name="id_transporte" id="id_transporte" class="form-control"  autofocus hidden>
+                    </div>
+                     <div class="col-md-1 col-sm-2">
+                       <div class="form-group">
+                            <div class="text-center col-md-12 col-sm-12">
+                                <a href="" class="btn bg-gradient-secondary w-100 mt-4 mb-0"><i class="ni ni-fat-add"></i></a>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-12" >
+                        <div class="form-group">
+                           <label>Placas Tracto</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="placas_tracto" id="placas_tracto"  type="text" autofocus>
+                            </div>
+                       </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12" >
+                        <div class="form-group">
+                            <label>Licencia</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="licencia" id="licencia"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="col-md-3 col-sm-12" >
+                        <div class="form-group">
+                            <label>CAAT</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="caat" id="caat"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="col-md-3 col-sm-12" >
+                        <div class="form-group">
+                            <label>Número ECO</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="nro_eco" id="nro_eco"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-12" >
+                        <div class="form-group">
+                           <label>Capacidad</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="capacidad" id="capacidad"  type="text" autofocus>
+                            </div>
+                       </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12" >
+                        <div class="form-group">
+                            <label>Placas Caja</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="placa_cajas" id="placa_cajas"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="col-md-3 col-sm-12" >
+                        <div class="form-group">
+                            <label>Transporte Afianzador</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="transporte_afianzador" id="transporte_afianzador"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="col-md-3 col-sm-12" >
+                        <div class="form-group">
+                            <label>Código Aduanero</label>
+                            <div class="input-group mb-4">
+                              <input class="form-control" name="codigo_aduanero" id="codigo_aduanero"  type="text" autofocus>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body ">
+                <h6>Productos</h6>
+               
+          
+                <div class="col-md-12 col-sm-12" >
+                   <div class="table-responsive" class="productos_tabla">
+                        <table class="table align-items-center mb-0" id="lista" name="lista">
+                            <thead>
+                                <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width=5% >N°</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" width=10% >Factura</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" width=10% >Cajas</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" width=10% >Peso</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" width=50% >Descripción</th>
+                                <th class="text-secondary opacity-7" width=10% ></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="product0">
+                                <th class="text-center">1</th>
+                                <th><input class="form-control" name="producto_factura[]" id="producto_factura"  type="text" autofocus></th>
+                                <th><input class="form-control" name="producto_cajas[]" id="producto_cajas"  type="text" autofocus></th>
+                                <th><input class="form-control" name="producto_peso[]" id="producto_peso"  type="text" autofocus placeholder="En Kg."></th>
+                                <th><input class="form-control" name="producto_descripcion[]" id="producto_descripcion"  type="text" autofocus></th>
+                                <td><a href="#" class="btn btn-link text-danger text-gradient px-3 mb-0"><i class="far fa-trash-alt me-2"></i></a></td>
+                                </tr>
+                                <!--<tr id="product1">
+                                <th class="text-center">02</th>
+                                <th><input class="form-control" name="producto_factura[]" id="producto_factura"  type="text" autofocus></th>
+                                <th><input class="form-control" name="producto_cajas[]" id="producto_cajas"  type="text" autofocus></th>
+                                <th><input class="form-control" name="producto_peso[]" id="producto_peso"  type="text" autofocus placeholder="En Kg."></th>
+                                <th><input class="form-control" name="producto_descripcion[]" id="producto_descripcion"  type="text" autofocus></th>
+                                <td><a href="#" class="btn btn-link text-danger text-gradient px-3 mb-0"><i class="far fa-trash-alt me-2"></i></a></td>
+                                </tr> -->
+                                <!-- <tr id="product1"></tr> -->
+                            </tbody>
+                            <tfoot style="background-color: #f0f0f0;">
+                                <tr>
+                                <th colspan="2" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" id="totalcajas"></th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" id="totalpeso"></th>
+                                <th colspan="2" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>  
+                <div class="row"> 
+                    <div class=" col-md-6 col-sm-12" >
+                        <div class="form-group" style="float: left; ">
+                            <div class="input-group mb-4">
+                                <button class="btn bg-gradient-success w-100 mt-4 mb-0" id="add_row" type="button"><i class="fas fa-plus-circle"></i> Añadir Fila</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class=" col-md-6 col-sm-12">
+                        <div class="form-group"  style="float: right; ">
+                            <div class="input-group mb-4" >
+                                <button class="btn bg-gradient-warning w-100 mt-4 mb-0" id='delete_row' type="button"><i class="fa fa-minus-circle"></i> Eliminar Fila </button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12 ">
+                <div class="card mb-4 ">
+                    <div class="card-body ">
+                        <h6>Pagos</h6>
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12" >
+                                <div class="form-group">
+                                    <label>Flete</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text">$</span>
+                                      <input type="text"  class="monto form-control text-center" onchange="sumarMonto();" name="flete" id="flete" autofocus />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12" >
+                                <div class="form-group">
+                                    <label>Seguro</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text">$</span>
+                                      <input type="text"  class="monto form-control text-center" onchange="sumarMonto();" name="seguro" id="seguro" autofocus/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-11 col-sm-12" >
+                            <div class="form-group">
+                                <label>Total</label>
+                                <div class="input-group"  >
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" id="total" name="total" value="0" class="form-control text-center" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 ">
+                <div class="card mb-4">
+                    <div class="card-body ">
+                        <h6>Otros Cargos</h6>
+                        <div class="form-group">
+                            <label>*Observaciones</label>
+                            <div class="input-field">
+                                <textarea class="form-control" id="observaciones" name="observaciones" rows="4" autofocus></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body ">
                 <div class="row ">
                     <div class="text-center col-md-3 col-sm-12">
 
@@ -701,6 +994,42 @@
         </div>
     </div>
 </div>
+
+@include('modales.new_recoleccion')
+
+                <!-- Modal -->
+                    <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">New message to @CT</h5>
+                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form>
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                <input type="text" class="form-control" value="Creative Tim" id="recipient-name">
+                              </div>
+                              <div class="form-group">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea class="form-control" id="message-text"></textarea>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn bg-gradient-primary">Send message</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal -->
+
+
 @section('scripts')
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -967,8 +1296,142 @@
           })
         });
     </script>
+    <!-- Transporte -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $.ajax({
+            type: 'get',
+            url:'{!!URL::to('findTransporte')!!}',
+            success:function(response){
+                var transporteArray = response;
+                var dataTransporte = {};
+                var dataTransporte2 = {};
+                for (var i = 0; i < transporteArray.length; i++){
+                    dataTransporte[transporteArray[i].operador] = null;
+                    dataTransporte2[transporteArray[i].operador] = transporteArray[i];
 
+                }
+             
+                 $('input#operador').autocomplete({
+                      data: dataTransporte,
+                      limit:5,
+                      onAutocomplete:function(reqdata){
+                        $('#placas_tracto').val(dataTransporte2[reqdata]['placas_tracto']);
+                        $('#licencia').val(dataTransporte2[reqdata]['licencia']);
+                        $('#caat').val(dataTransporte2[reqdata]['caat']);
+                        $('#nro_eco').val(dataTransporte2[reqdata]['nro_eco']);
+                        $('#capacidad').val(dataTransporte2[reqdata]['capacidad']);
+                        $('#placa_cajas').val(dataTransporte2[reqdata]['placa_cajas']);
+                        $('#transporte_afianzador').val(dataTransporte2[reqdata]['transporte_afianzador']);
+                        $('#codigo_aduanero').val(dataTransporte2[reqdata]['codigo_aduanero']);
+                        $('#id_transporte').val(dataTransporte2[reqdata]['id']);
+                 
+                      }
+                    });
+            }
+          })
+        });
+    </script>
+    <!-- <script>
+      $(document).ready(function(){
+        let row_number = {{ count(old('products', [''])) }};
+        $("#add_row").click(function(e){
+          e.preventDefault();
+          let new_row_number = row_number - 1;
+          $('#product' + row_number).html($('#product' + new_row_number).html()).find('td:first-child');
+          $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
+          row_number++;
+        });
+        $("#delete_row").click(function(e){
+          e.preventDefault();
+          if(row_number > 1){
+            $("#product" + (row_number - 1)).html('');
+            row_number--;
+          }
+        });
+      });
+    </script> -->
+    <script>
+        var boton=document.getElementById('add_row');
+        var lista=document.getElementById('lista');
+        var data = [];
+        var cant = 1;
+        boton.addEventListener("click", agregar_producto);
+        function agregar_producto(){
+            //var factura = document.getElementById('producto_factura').value;
+            //var cajas = parseFloat(document.getElementById('producto_cajas').value);
+            //var peso = parseFloat(document.getElementById('producto_peso').value);
+            //var descripcion = document.getElementById('producto_descripcion').value;
+            var nrofila = cant+1;
+            
+            data.push(
+                {
+                    "id": cant,
+                    //"factura": factura,
+                    //"cajas": cajas,
+                    //"peso": peso,
+                    //"descripcion": descripcion, 
+                }
+            );
+            var id_row = 'product' + cant;
+            var fila = '<tr id=' + id_row + '><th class="text-center">' + nrofila + '</th><th><input class="form-control" name="producto_factura[]" id="producto_factura"  type="text" autofocus></th><th><input class="form-control" name="producto_cajas[]" id="producto_cajas"  type="text" autofocus></th><th><input class="form-control" name="producto_peso[]" id="producto_peso"  type="text" autofocus placeholder="En Kg."></th><th><input class="form-control" name="producto_descripcion[]" id="producto_descripcion"  type="text" autofocus></th><td><a href="#" class="btn btn-link text-danger text-gradient px-3 mb-0" onclick="eliminar('+ cant +')";><i class="far fa-trash-alt me-2"></i></a></td> </tr>';
+            //Agregar a la lista
+            $('#lista').append(fila);
+            //$('#producto_factura').val('');
+            //$('#producto_cajas').val('');
+            //$('#producto_peso').val('');
+            //$('#producto_descripcion').val('');
+            //$('#producto_factura').focus();
+            cant++;
+            //sumar();
+            
+        }
+        function eliminar(row){
+            //remover la fila del html
+            $("#product"+row).remove();
+            var i = 0;
+            var pos = 0;
+            for(x of data){
+                if(x.id==row){
+                    pos = i;
+                }
+                i++;
+            }
+            data.splice(pos, 1);
+            //sumar();
+        }
 
-
+       function sumar(){
+            
+            var cajas = parseFloat(document.getElementById('producto_cajas').value);
+            var peso = parseFloat(document.getElementById('producto_peso').value);
+            var totalcajas = 0;
+            var totalpeso = 0;
+            for (x of data) {
+                totalcajas = totalcajas + x.cajas;
+            }
+            for (y of data) {
+                totalpeso = totalpeso + y.peso;
+            }
+            document.getElementById('totalcajas').innerHTML =  totalcajas;
+            document.getElementById('totalpeso').innerHTML =  totalpeso;
+        }
+        
+         
+    </script>
+    <script type="text/javascript">
+        /* Sumar dos números. */
+        function sumarMonto()
+        {
+          const $total = document.getElementById('total');
+          let subtotal = 0;
+          [ ...document.getElementsByClassName( "monto" ) ].forEach( function ( element ) {
+            if(element.value !== '') {
+              subtotal += parseFloat(element.value);
+            }
+          });
+          $total.value = subtotal;
+        }
+    </script>
 @endsection
 

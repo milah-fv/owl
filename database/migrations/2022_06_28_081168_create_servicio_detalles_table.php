@@ -24,7 +24,12 @@ class CreateServicioDetallesTable extends Migration
             $table->string('volumen', 20)->nullable();
             $table->string('pallets', 20)->nullable();
             $table->string('cajas', 20)->nullable();
+            $table->string('medio_transporte', 20)->nullable();
+            $table->string('aduana_inicio', 50)->nullable();
+            $table->string('aduana_ingreso', 50)->nullable();
+            $table->string('observaciones', 500)->nullable();
             $table->unsignedBigInteger('descripcion_merc_id')->nullable();
+            //$table->unsignedBigInteger('producto_id')->nullable();
             $table->unsignedBigInteger('servicio_id')->nullable();
             $table->foreign('servicio_id')
                     ->references('id')
@@ -32,6 +37,9 @@ class CreateServicioDetallesTable extends Migration
             $table->foreign('descripcion_merc_id')
                     ->references('id')
                     ->on('descripcion_mercaderia')->onDelete('set null');
+            /*$table->foreign('producto_id')
+                    ->references('id')
+                    ->on('productos')->onDelete('set null');*/
             $table->timestamps();
         });
     }

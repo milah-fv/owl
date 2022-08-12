@@ -61,9 +61,10 @@
             <table class="table align-items-center justify-content-center mb-0" id="ag_ad_importacion">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
+                  <th></th>
+                  <th width="5%" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
                   N°</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  <th width="25%" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   Nombre</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   NIT</th>
@@ -76,7 +77,7 @@
                   <th
                   class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   Teléfono</th>
-                  <th
+                  <th width="10%"
                   class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
                 Opciones</th>
 
@@ -84,20 +85,18 @@
               </thead>
               <tbody>
                 @foreach( $agentes_ad_importacion as $agente_ad_importacion)
-
                 <tr>
+                  <td>{{$agente_ad_importacion->updated_at}}</td>
                   <td  class="align-middle text-center">
-                    <p class="text-sm font-weight-bold mb-0">{{$agente_ad_importacion->id}}</p>
+                    <p class="text-xs font-weight-bold mb-0">{{$agente_ad_importacion->id}}</p>
                   </td>
                   <td>
                     <div class="my-auto">
-                      <h6 class="mb-0 text-sm">{{$agente_ad_importacion->nombre}}</h6>
+                      <h6 class="mb-0 text-xs font-weight-bold">{{$agente_ad_importacion->nombre}}</h6>
                     </div>
                   </td>
                   <td >
-                    <div class="my-auto">
-                      <p class="text-sm font-weight-bold mb-0">{{$agente_ad_importacion->rfc}}</p>
-                    </div>
+                    <span class="text-xs font-weight-bold mb-0">{{$agente_ad_importacion->nit}}</span>
                   </td>
                   <td>
                     <span class="text-xs font-weight-bold">{{$agente_ad_importacion->domicilio}}</span>
@@ -112,11 +111,11 @@
                     <form action="{{ url('/ag_ad_importacion/'.$agente_ad_importacion->id) }}" method="post" class="formEliminar">
                       @csrf
                       {{method_field('DELETE')}}
-                      <a class="btn btn-link text-dark px-3 mb-0" href="{{ url('/ag_ad_importacion/'.$agente_ad_importacion->id.'/edit') }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Editar</a>
+                      <a title="Editar" style="padding:0px;" class="btn btn-link text-dark px-3 mb-0" href="{{ url('/ag_ad_importacion/'.$agente_ad_importacion->id.'/edit') }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i></a>
 
                       <input type="hidden" name="eliminarValor" value="{{ $agente_ad_importacion->id }}">
-                      <button type="submit" class="btn btn-link text-danger text-gradient px-3 mb-0 "  id="btnEliminar">
-                        <i class="far fa-trash-alt me-2"></i>Eliminar
+                      <button title="Eliminar" style="padding:0px;" type="submit" class="btn btn-link text-danger text-gradient px-3 mb-0 "  id="btnEliminar">
+                        <i class="far fa-trash-alt me-2"></i>
                       </button>
                     </form> 
                   </td>
@@ -165,6 +164,20 @@
               "previous": "<i class='fa fa-angle-left'></i>",
             }
         },
+        "order": [[ 0, "desc" ]], 
+        "columnDefs": [
+                { "orderable": true, "className": 'reorder', "targets": [1,2] },
+                { "orderable": false, "targets": '_all' },
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
+                },
+                { "targets":[0,1,2,5,6,7], "className": "desktop" },
+                { "targets":[0,1,2,7], "className": "tablet, mobile" },
+                { "targets":[3,4], "className": "none" },
+                { "orderable": false, "targets": [1,2] }
+            ],
       });
   </script>
   <script type="text/javascript">

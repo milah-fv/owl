@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
 @endsection
 
-@section('menu-5')
+@section('menu-8')
 <li class="nav-item">
         <a class="nav-link active" href="/serie">
           <div

@@ -15,8 +15,8 @@ class CreateServiciosTable extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
-            $table->string('numero', 10)->nullable();
-            $table->string('codigo', 10)->unique()->nullable();
+            //$table->string('numero', 10)->nullable();
+            //$table->string('codigo', 10)->unique()->nullable();
             $table->date('fecha')->nullable();
             $table->unsignedBigInteger('estado_id')->nullable();
             $table->unsignedBigInteger('exportador_id')->nullable();
@@ -24,6 +24,7 @@ class CreateServiciosTable extends Migration
             $table->unsignedBigInteger('importador_id')->nullable();
             $table->unsignedBigInteger('agente_importacion_id')->nullable();
             $table->unsignedBigInteger('serie_id')->nullable();
+            $table->unsignedBigInteger('transporte_id')->nullable();
             $table->timestamps();
             $table->foreign('estado_id')
                     ->references('id')
@@ -43,6 +44,9 @@ class CreateServiciosTable extends Migration
             $table->foreign('serie_id')
                     ->references('id')
                     ->on('series')->onDelete('set null'); 
+            $table->foreign('transporte_id')
+                    ->references('id')
+                    ->on('transportes')->onDelete('set null'); 
         });
     }
 

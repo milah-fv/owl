@@ -18,8 +18,8 @@ class CreateExportadoresTable extends Migration
             $table->string('nombre', 100);
             $table->string('rfc', 20)->unique();
             $table->string('domicilio', 200)->nullable();
-            $table->string('pais_origen', 30)->nullable();
-            $table->string('ciudad_origen', 30)->nullable();
+           // $table->string('pais_origen', 30)->nullable();
+            //$table->string('ciudad_origen', 30)->nullable();
             $table->string('contacto', 200)->nullable();
             $table->string('telefono', 50)->nullable();
             $table->timestamps();

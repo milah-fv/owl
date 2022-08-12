@@ -11,7 +11,7 @@ class Recoleccion extends Model
     use HasFactory;
     protected $table = 'recoleccion';
     protected $fillable = [
-        'id', 'fecha', 'hora', 'tipo_transporte', 'servicio_id', 'emp_transporte_id', 'direccion',
+        'id', 'fecha', 'hora', 'tipo_transporte', 'servicio_id', 'emp_transporte_id', 'direccion', 'lugar_origen',
     ];
 
     public function empresaTransporte(){

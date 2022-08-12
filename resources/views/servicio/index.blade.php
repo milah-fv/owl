@@ -58,8 +58,8 @@
                   <th> created_at</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
                   N°</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                  Código</th>
+                  <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  Código</th> -->
                   <th
                   class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   Fecha Reg.</th>
@@ -115,20 +115,74 @@
           "serverSide": true,
           "ajax": "/servicioJson",
           "columns": [
-            {data: 'created_at'},
-            {data: 'id'},
-            {data: 'codigo'},
+            {data: 'created_at'},  
+            {data: null,
+              render: function( data, type, row) 
+                    {
+                        return row.serie.serie + '-'+row.id;
+                    }              
+            },
             {data: 'fecha'},
-            {data: 'exportador.nombre'},
-            {data: 'importador.nombre'},
-            {data: 'estado_id'},
+            {data: 'exportador.nombre',
+            render: function(data) 
+                    { 
+                      if(data == null)
+                        {
+                            return '-';             
+                        }
+
+                        return  data;
+                    }
+
+            },
+            {data: 'importador.nombre',
+            render: function(data) 
+                    { 
+                      if(data == null)
+                        {
+                            return '-';             
+                        }
+
+                        return  data;
+                    }  
+            },
+            {data: 'estado.estado',
+              render: function(data) 
+                    {
+                        if(data == 'Recolección')
+                        {
+                            return '<span class="badge badge-sm badge-secondary">'+ data +'</span>';             
+                        }
+                        else if(data == 'En Tránsito')
+                        {
+                            return '<span class="badge badge-sm badge-info">'+ data +'</span>'                  
+                        }
+                        else if(data == 'En Maniobras')
+                        {
+                            return '<span class="badge badge-sm badge-dark">'+ data +'</span>'                  
+                        }
+                        else if(data == 'Despacho Aduanal')
+                        {
+                            return '<span class="badge badge-sm badge-warning">'+ data +'</span>'                  
+                        }
+                        else if(data == 'Destino Final')
+                        {
+                            return '<span class="badge badge-sm badge-primary">'+ data +'</span>'                  
+                        }
+                        else
+                        {
+                            return '<span class="badge badge-sm badge-success">'+ data +'</span>'                            
+                        }
+                    }
+
+            },
             // opciones en vez de serie
             {data: 'btn'},
             //{data: 'detalle.fecha_factura'},
             //
             {data: 'recolecciones', 
               render: function(data) 
-                    {
+                    {   
                         return '<br> <ul> <b>Fecha : </b>'+ data.fecha + ' - <b> Hora : </b>'+ data.hora +'</ul> <ul> <b>Tipo de Transporte : </b>' + data.tipo_transporte  + '</ul>';
                     }
             },
@@ -151,10 +205,10 @@
                     "visible": false,
                     "searchable": true
                 },
-                { "targets":[0,1,2,3,4,5,6,7], "className": "desktop" },
-                { "targets":[0,1,2,3,6,7], "className": "tablet, mobile" },
-                { "targets":[8,9], "className": "none" },
-                { "orderable": false, "targets": [4] }
+                { "targets":[0,1,2,3,4,5,6], "className": "desktop" },
+                { "targets":[0,1,2,5,6], "className": "tablet, mobile" },
+                { "targets":[7,8], "className": "none" },
+                { "orderable": false, "targets": [3] }
             ],
           responsive: true,
           autoWidth: false,

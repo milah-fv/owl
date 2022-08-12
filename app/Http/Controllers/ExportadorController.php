@@ -8,6 +8,11 @@ Use Alert;
 
 class ExportadorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function getEmpresa(){
         $p = Exportador::all();
         return response()->json($p);

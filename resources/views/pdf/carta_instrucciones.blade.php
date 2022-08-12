@@ -17,7 +17,7 @@
   	</header>
   	
   	<b>Fecha:</b> Mexico - {{ date('d-m-Y', strtotime($servicio->fecha)) }}
-  	<b style="margin-left: 350 px ">Codigo:</b> {{ $servicio->codigo }}
+  	<b style="margin-left: 450 px"> {{ $servicio->serie->serie }}-{{$servicio->id}} </b>
   	<br>
   	Sirvase a atender la siguiente:
   	<h4 style="text-align: center; font-size:9; margin-bottom: 0px; margin-top: 0;">CARTA DE INSTRUCCIONES</h4>
@@ -41,17 +41,17 @@
   		</tr>
   		<tr>
   			<td width="100">NOMBRE DE LA EMPRESA: </td>
-  			<td style="padding-left: 30px"> {{ $servicio->recolecciones->empresaTransporte['nombre'] }} </td> 
+  			<td style="padding-left: 30px"> {{ isset($servicio->recolecciones->empresaTransporte['nombre']) ? $servicio->recolecciones->empresaTransporte['nombre']: old('empresa_recolectora') }} </td> 
   		</tr>
   		<tr>
   			<td width="100">DIRECCION: </td>
-  			<td style="padding-left: 30px" colspan="6"> {{ $servicio->recolecciones->empresaTransporte['domicilio'] }} </td> 
+  			<td style="padding-left: 30px" colspan="6"> {{ isset($servicio->recolecciones->empresaTransporte['domicilio']) ? $servicio->recolecciones->empresaTransporte['domicilio']: old('domicilio_recoleccion') }} </td> 
   		</tr>
       <tr>
         <td width="100">CONTACTO: </td>
-        <td style="padding-left: 30px" colspan="2"> {{ $servicio->recolecciones->empresaTransporte['contacto'] }} </td> 
+        <td style="padding-left: 30px" colspan="2"> {{ isset($servicio->recolecciones->empresaTransporte['contacto']) ? $servicio->recolecciones->empresaTransporte['contacto']: old('contacto_recoleccion') }}</td> 
         <td width="50">TELEFONO: </td>
-        <td > {{ $servicio->recolecciones->empresaTransporte['telefono'] }} </td> 
+        <td >{{ isset($servicio->recolecciones->empresaTransporte['telefono']) ? $servicio->recolecciones->empresaTransporte['telefono']: old('telefono_recoleccion') }}</td> 
       </tr>
     </table>  
 
@@ -74,17 +74,18 @@
       </tr>
       <tr>
         <td width="100">NOMBRE DE LA EMPRESA: </td>
-        <td style="padding-left: 30px"> {{ $servicio->cargas->empresaTransporte['nombre'] }} </td> 
+        <td style="padding-left: 30px"> {{ isset($servicio->cargas->empresaTransporte['nombre']) ? $servicio->cargas->empresaTransporte['nombre']: old('empresa_carga') }} </td> 
       </tr>
       <tr>
         <td width="100">DIRECCION: </td>
-        <td style="padding-left: 30px" colspan="6"> {{ $servicio->cargas->empresaTransporte['domicilio'] }} </td> 
+        <td style="padding-left: 30px" colspan="6"> {{ isset($servicio->cargas->empresaTransporte['domicilio']) ? $servicio->cargas->empresaTransporte['domicilio']: old('direccion_emp_carga') }} </td> 
       </tr>
       <tr>
         <td width="100">CONTACTO: </td>
-        <td style="padding-left: 30px" colspan="2" > {{ $servicio->cargas->empresaTransporte['contacto'] }} </td> 
+        <td style="padding-left: 30px" colspan="2" > {{ isset($servicio->cargas->empresaTransporte['contacto']) ? $servicio->cargas->empresaTransporte['contacto']: old('contacto_emp_carga') }}</td> 
+
         <td width="50">TELEFONO: </td>
-        <td > {{ $servicio->cargas->empresaTransporte['telefono'] }} </td> 
+        <td > {{ isset($servicio->cargas->empresaTransporte['telefono']) ? $servicio->cargas->empresaTransporte['telefono']: old('telefono_emp_carga') }}</td> 
       </tr>
     </table> 
 <hr>
@@ -92,81 +93,82 @@
   
       <tr >
         <td > <b>EXPORTADOR:</b>  </td>
-        <td style="padding-left: 30px;" colspan="6" > <b> {{ $servicio->exportador->nombre }} </b> </td>
+        <td style="padding-left: 30px;" colspan="6" > <b> {{ isset($servicio->exportador->nombre) ? $servicio->exportador->nombre: old('nombre_exportador') }}</b> </td>
       </tr>
       <tr>
         <td>RFC: </td>
-        <td style="padding-left: 30px"> {{ $servicio->exportador->rfc }} </td> 
+        <td style="padding-left: 30px"> {{ isset($servicio->exportador->rfc) ? $servicio->exportador->rfc: old('rfc_exportador') }} </td> 
       </tr>
       <tr>
         <td>DOMICILIO: </td>
-        <td style="padding-left: 30px" colspan="5"> {{ $servicio->exportador->domicilio }} </td> 
+        <td style="padding-left: 30px" colspan="5"> {{ isset($servicio->exportador->domicilio) ? $servicio->exportador->domicilio: old('domicilio_exportador') }} </td> 
       </tr>
       <tr>
         <td>CONTACTO: </td>
-        <td style="padding-left: 30px" > {{ $servicio->exportador->contacto }} </td> 
+        <td style="padding-left: 30px" >{{ isset($servicio->exportador->contacto) ? $servicio->exportador->contacto: old('contacto_exportador') }}</td> 
         <td>TELEFONO: </td>
-        <td style="padding-left: 30px"> {{ $servicio->exportador->telefono }} </td>
+        <td style="padding-left: 30px"> {{ isset($servicio->exportador->telefono) ? $servicio->exportador->telefono: old('telefono_exportador') }}</td>
       </tr>
 
 
       <tr >
         <td style="padding-top: 5px;"> <b>AGENTE ADUANAL DE EXPORTACION:</b>  </td>
-        <td style="padding-left: 30px; padding-top: 5px" colspan="6" >  {{ $servicio->agente_ad_exportacion->nombre }}  </td>
+        <td style="padding-left: 30px; padding-top: 5px" colspan="6" >  {{ isset($servicio->agente_ad_exportacion->nombre) ? $servicio->agente_ad_exportacion->nombre: old('nombre_ag_ad_exportacion') }} </td>
       </tr>
       <tr>
         <td>NIT: </td>
-        <td style="padding-left: 30px"> {{ $servicio->agente_ad_exportacion->nit }} </td> 
+        <td style="padding-left: 30px"> {{ isset($servicio->agente_ad_exportacion->nit) ? $servicio->agente_ad_exportacion->nit: old('nit_ag_ad_exportacion') }} </td> 
       </tr>
       <tr>
         <td>DOMICILIO: </td>
-        <td style="padding-left: 30px" colspan="5"> {{ $servicio->agente_ad_exportacion->domicilio }} </td> 
+        <td style="padding-left: 30px" colspan="5"> {{ isset($servicio->agente_ad_exportacion->domicilio) ? $servicio->agente_ad_exportacion->domicilio: old('domicilio_ag_ad_exportacion') }} </td> 
       </tr>
       <tr>
         <td>CONTACTO: </td>
-        <td style="padding-left: 30px" > {{ $servicio->agente_ad_exportacion->contacto }} </td> 
+        <td style="padding-left: 30px" > {{ isset($servicio->agente_ad_exportacion->contacto) ? $servicio->agente_ad_exportacion->contacto: old('contacto_ag_ad_exportacion') }} </td> 
+
         <td>TELEFONO: </td>
-        <td style="padding-left: 30px"> {{ $servicio->agente_ad_exportacion->telefono }} </td>
+        <td style="padding-left: 30px"> {{ isset($servicio->agente_ad_exportacion->telefono) ? $servicio->agente_ad_exportacion->telefono: old('telefono_ag_ad_exportacion') }} </td>
       </tr>
 
 
       <tr >
         <td style="padding-top: 5px;"> <b>IMPORTADOR:</b>  </td>
-        <td style="padding-left: 30px; padding-top: 5px" colspan="6" >  {{ $servicio->importador->nombre }}  </td>
+        <td style="padding-left: 30px; padding-top: 5px" colspan="6" > {{ isset($servicio->importador->nombre) ? $servicio->importador->nombre: old('nombre_importador') }} </td>
       </tr>
       <tr>
         <td>NIT: </td>
-        <td style="padding-left: 30px"> {{ $servicio->importador->nit }} </td> 
+        <td style="padding-left: 30px"> {{ isset($servicio->importador->nit) ? $servicio->importador->nit: old('nit_importador') }} </td> 
       </tr>
       <tr>
         <td>DOMICILIO: </td>
-        <td style="padding-left: 30px" colspan="5"> {{ $servicio->importador->domicilio }} </td> 
+        <td style="padding-left: 30px" colspan="5"> {{ isset($servicio->importador->domicilio) ? $servicio->importador->domicilio: old('domicilio_importador') }} </td> 
       </tr>
       <tr>
         <td>CONTACTO: </td>
-        <td style="padding-left: 30px" > {{ $servicio->importador->contacto }} </td> 
+        <td style="padding-left: 30px" > {{ isset($servicio->importador->contacto) ? $servicio->importador->contacto: old('contacto_importador') }} </td> 
         <td>TELEFONO: </td>
-        <td style="padding-left: 30px"> {{ $servicio->importador->telefono }} </td>
+        <td style="padding-left: 30px"> {{ isset($servicio->importador->telefono) ? $servicio->importador->telefono: old('telefono_importador') }} </td>
       </tr>
 
 
       <tr >
         <td style="padding-top: 5px;"> <b>AGENTE ADUANAL DE IMPORTACION:</b>  </td>
-        <td style="padding-left: 30px; padding-top: 5px" colspan="6" >  {{ $servicio->agente_ad_importacion->nombre }}  </td>
+        <td style="padding-left: 30px; padding-top: 5px" colspan="6" > {{ isset($servicio->agente_ad_importacion->nombre) ? $servicio->agente_ad_importacion->nombre: old('nombre_ag_ad_importacion') }} </td>
       </tr>
       <tr>
         <td>NIT: </td>
-        <td style="padding-left: 30px"> {{ $servicio->agente_ad_importacion->nit }} </td> 
+        <td style="padding-left: 30px"> {{ isset($servicio->agente_ad_importacion->nit) ? $servicio->agente_ad_importacion->nit: old('nit_ag_ad_importacion') }} </td> 
       </tr>
       <tr>
         <td>DOMICILIO: </td>
-        <td style="padding-left: 30px" colspan="5"> {{ $servicio->agente_ad_importacion->domicilio }} </td> 
+        <td style="padding-left: 30px" colspan="5"> {{ isset($servicio->agente_ad_importacion->domicilio) ? $servicio->agente_ad_importacion->domicilio: old('domicilio_ag_ad_importacion') }} </td> 
       </tr>
       <tr>
         <td>CONTACTO: </td>
-        <td style="padding-left: 30px" > {{ $servicio->agente_ad_importacion->contacto }} </td> 
+        <td style="padding-left: 30px" > {{ isset($servicio->agente_ad_importacion->contacto) ? $servicio->agente_ad_importacion->contacto: old('contacto_ag_ad_importacion') }} </td> 
         <td>TELEFONO: </td>
-        <td style="padding-left: 30px"> {{ $servicio->agente_ad_importacion->telefono }} </td>
+        <td style="padding-left: 30px"> {{ isset($servicio->agente_ad_importacion->telefono) ? $servicio->agente_ad_importacion->telefono: old('telefono_ag_ad_importacion') }} </td>
       </tr>
 </table>
   <table height=60 width="100%" cellpadding="0" cellspacing="0" style="margin-top: 5px;">
@@ -183,13 +185,13 @@
       </tr>
       <tr>
         <td width="100">NOMBRE DE LA EMPRESA: </td>
-        <td style="padding-left: 30px"> {{ $servicio->entregas->empresaTransporte['nombre'] }} </td> 
+        <td style="padding-left: 30px"> {{ isset($servicio->entregas->empresaTransporte['nombre']) ? $servicio->entregas->empresaTransporte['nombre']: old('empresa_final') }} </td> 
       </tr>
        <tr>
         <td width="100">CONTACTO: </td>
-        <td style="padding-left: 30px" colspan="2" > {{ $servicio->entregas->empresaTransporte['contacto'] }} </td> 
+        <td style="padding-left: 30px" colspan="2" > {{ isset($servicio->entregas->empresaTransporte['contacto']) ? $servicio->entregas->empresaTransporte['contacto']: old('contacto_emp_final') }} </td> 
         <td width="50">TELEFONO: </td>
-        <td > {{ $servicio->entregas->empresaTransporte['telefono'] }} </td> 
+        <td > {{ isset($servicio->entregas->empresaTransporte['telefono']) ? $servicio->entregas->empresaTransporte['telefono']: old('telefono_emp_final') }} </td> 
       </tr>
       <tr>
         <td width="100">LUGAR DE ENTREGA: </td>
@@ -217,11 +219,11 @@
     </tr>
     <tr>
       <td width="150"> DESCRIPCIÓN DE LA MERCADERÍA: </td>
-      <td colspan="3">{{ $servicio->detalle->desc_mercaderia['descripcion_mercaderia'] }} </td>
+      <td colspan="3"> {{ isset($servicio->detalle->desc_mercaderia['descripcion_mercaderia']) ? $servicio->detalle->desc_mercaderia['descripcion_mercaderia']: old('descripcion_mercancia') }} </td>
     </tr>
     <tr>
       <td width="150">FRACCIÓN ARANCELARIA: </td>
-      <td>{{ $servicio->detalle->desc_mercaderia['fraccion_arancelaria'] }}</td>
+      <td> {{ isset($servicio->detalle->desc_mercaderia['fraccion_arancelaria']) ? $servicio->detalle->desc_mercaderia['fraccion_arancelaria']: old('fraccion_arancelaria') }} </td>
       <td width="100">REGIMEN ADUANERO: </td>
       <td>{{ $servicio->detalle->regimen_aduanero }}</td>
     </tr>

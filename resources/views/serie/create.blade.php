@@ -3,7 +3,7 @@
 @section('subtitulo1', 'Series de Facturación')
 @section('subtitulo2', 'Nueva Serie')
 
-@section('menu-5')
+@section('menu-8')
 <li class="nav-item">
         <a class="nav-link active" href="/serie">
           <div

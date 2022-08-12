@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
 @endsection
 
-@section('menu-4')
+@section('menu-7')
 <li class="nav-item">
   <a class="nav-link  active" href="/empleados">
     <div
@@ -60,30 +60,37 @@
             <table class="table align-items-center justify-content-center mb-0" id="empleados">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
+                  <th></th>
+                  <th width="5%" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
                   N°</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   Avatar</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  <th  width="25%" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   Nombres y Apellidos</th>
                   <th
                   class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                N° Celular</th>
+                  N° Celular</th>
                   <th
                   class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                   Cargo</th>
-                  <th
+                  <th  width="10%
                   class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ">
                 Opciones</th>
-
+                  <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  Domicilio</th>
+                  <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  Correo</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach( $empleados as $empleado)
 
                 <tr>
+                  <td>{{$empleado->updated_at}}</td>
                   <td  class="align-middle text-center">
-                    <p class="text-sm font-weight-bold mb-0">{{$empleado->id}}</p>
+                    <p class="text-xs font-weight-bold mb-0">{{$empleado->id}}</p>
                   </td>
                   <td >
                     <div class="my-auto">
@@ -99,16 +106,14 @@
                   </td>
                   <td>
                     <div class="my-auto">
-                      <h6 class="mb-0 text-sm">{{$empleado->nombre}} {{$empleado->apellidos}}</h6>
+                      <h6 class="mb-0 text-xs font-weight-bold">{{$empleado->name}} {{$empleado->apellidos}}</h6>
                     </div>
                   </td>
                   <td >
-                    <div class="my-auto">
-                      <p class="text-sm font-weight-bold mb-0">{{$empleado->celular}}</p>
-                    </div>
+                      <span class="text-xs font-weight-bold mb-0">{{$empleado->celular}}</span>
                   </td>
                   <td>
-                    <span class="text-xs font-weight-bold">{{$empleado->direccion}}</span>
+                    <span class="text-xs font-weight-bold">{{$empleado->cargo}}</span>
                   </td>
                   <td class="align-middle text-center">
                     <form action="{{ url('/empleados/'.$empleado->id) }}" method="post" class="formEliminar">
@@ -116,14 +121,20 @@
                       {{method_field('DELETE')}}
 
                       <!-- <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-eye text-dark me-2" aria-hidden="true"></i>Ver</a> -->
-                      <a class="btn btn-link text-dark px-3 mb-0" href="{{ url('/empleados/'.$empleado->id.'/edit') }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Editar</a>
+                      <a title="Editar" style="padding:0px;" class="btn btn-link text-dark px-3 mb-0" href="{{ url('/empleados/'.$empleado->id.'/edit') }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i></a>
 
                       <input type="hidden" name="eliminarValor" value="{{ $empleado->id }}">
-                      <button type="submit" class="btn btn-link text-danger text-gradient px-3 mb-0 "  id="btnEliminar">
+                      <button title="Eliminar" style="padding:0px;" type="submit" class="btn btn-link text-danger text-gradient px-3 mb-0 "  id="btnEliminar">
                         <!-- onclick="return confirm ('¿Seguro que quiere eliminar este registro?')" -->
-                        <i class="far fa-trash-alt me-2"></i>Eliminar
+                        <i class="far fa-trash-alt me-2"></i>
                       </button>
                     </form> 
+                  </td>
+                  <td>
+                    <span class="text-xs font-weight-bold">{{$empleado->direccion}}</span>
+                  </td>
+                  <td>
+                    <span class="text-xs font-weight-bold">{{$empleado->email}}</span>
                   </td>
                 </tr>
                 @endforeach
@@ -170,6 +181,20 @@
               "previous": "<i class='fa fa-angle-left'></i>",
             }
         },
+        "order": [[ 0, "desc" ]], 
+        "columnDefs": [
+                { "orderable": true, "className": 'reorder', "targets": [1,3] },
+                { "orderable": false, "targets": '_all' },
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
+                },
+                { "targets":[0,1,2,3,4,5,6], "className": "desktop" },
+                { "targets":[0,3,4,6], "className": "tablet, mobile" },
+                { "targets":[7,8], "className": "none" },
+                { "orderable": false, "targets": [1,3] }
+            ],
       });
   </script>
   <script type="text/javascript">

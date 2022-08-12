@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Pago extends Model
 {
     use HasFactory;
-    //Relacón uno a muchos (inversa)
-    /*public function servicio(){
-        return $this->belongsTo(Servicio::class);
-    }*/
+    protected $table = 'pago';
+    protected $fillable = [
+        'id', 'flete', 'seguro', 'total', 'servicio_id',
+    ];
+    
 }
