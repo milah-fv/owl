@@ -883,8 +883,8 @@
                                 <tr id="product0">
                                 <th class="text-center">1</th>
                                 <th><input class="form-control" name="producto_factura[]" id="producto_factura"  type="text" autofocus></th>
-                                <th><input class="form-control" name="producto_cajas[]" id="producto_cajas"  type="text" autofocus></th>
-                                <th><input class="form-control" name="producto_peso[]" id="producto_peso"  type="text" autofocus placeholder="En Kg."></th>
+                                <th><input class="montocajas form-control text-center" name="producto_cajas[]" id="producto_cajas"  type="text" autofocus onchange="sumarcajas();"></th>
+                                <th><input class="montopeso form-control text-center" name="producto_peso[]" id="producto_peso"  type="text" autofocus placeholder="En Kg." onchange="sumarpeso();"></th>
                                 <th><input class="form-control" name="producto_descripcion[]" id="producto_descripcion"  type="text" autofocus></th>
                                 <td><a href="#" class="btn btn-link text-danger text-gradient px-3 mb-0"><i class="far fa-trash-alt me-2"></i></a></td>
                                 </tr>
@@ -901,12 +901,13 @@
                             <tfoot style="background-color: #f0f0f0;">
                                 <tr>
                                 <th colspan="2" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" id="totalcajas"></th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" id="totalpeso"></th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" id="spTotalCaja"></th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" id="totalpeso" id="spTotalPeso"></th>
                                 <th colspan="2" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"></th>
                                 </tr>
                             </tfoot>
                         </table>
+                        
                     </div>
                 </div>  
                 <div class="row"> 
@@ -1352,7 +1353,7 @@
       });
     </script> -->
     <script>
-        var boton=document.getElementById('add_row');
+       var boton=document.getElementById('add_row');
         var lista=document.getElementById('lista');
         var data = [];
         var cant = 1;
@@ -1374,7 +1375,7 @@
                 }
             );
             var id_row = 'product' + cant;
-            var fila = '<tr id=' + id_row + '><th class="text-center">' + nrofila + '</th><th><input class="form-control" name="producto_factura[]" id="producto_factura"  type="text" autofocus></th><th><input class="form-control" name="producto_cajas[]" id="producto_cajas"  type="text" autofocus></th><th><input class="form-control" name="producto_peso[]" id="producto_peso"  type="text" autofocus placeholder="En Kg."></th><th><input class="form-control" name="producto_descripcion[]" id="producto_descripcion"  type="text" autofocus></th><td><a href="#" class="btn btn-link text-danger text-gradient px-3 mb-0" onclick="eliminar('+ cant +')";><i class="far fa-trash-alt me-2"></i></a></td> </tr>';
+            var fila = '<tr id=' + id_row + '><th class="text-center">' + nrofila + '</th><th><input class="form-control" name="producto_factura[]" id="producto_factura"  type="text" autofocus></th><th><input class="montocajas form-control" name="producto_cajas[]" id="producto_cajas"  type="text" autofocus onchange="sumarcajas();"></th><th><input class="form-control" name="producto_peso[]" id="producto_peso"  type="text" autofocus placeholder="En Kg."></th><th><input class="form-control" name="producto_descripcion[]" id="producto_descripcion"  type="text" autofocus></th><td><a href="#" class="btn btn-link text-danger text-gradient px-3 mb-0" onclick="eliminar('+ cant +')";><i class="far fa-trash-alt me-2"></i></a></td> </tr>';
             //Agregar a la lista
             $('#lista').append(fila);
             //$('#producto_factura').val('');
@@ -1421,7 +1422,7 @@
     </script>
     <script type="text/javascript">
         /* Sumar dos números. */
-        function sumarMonto()
+      function sumarMonto()
         {
           const $total = document.getElementById('total');
           let subtotal = 0;
@@ -1431,6 +1432,40 @@
             }
           });
           $total.value = subtotal;
+        } 
+    </script>
+
+    <script type="text/javascript">
+        function sumarcajas() {
+            var total = 0;
+            $(".montocajas").each(function() {
+                if (isNaN(parseFloat($(this).val()))) {
+                    total += 0;
+                } 
+                else {
+                    total += parseFloat($(this).val());
+                }
+            });
+
+            //alert(total);
+            document.getElementById('spTotalCaja').innerHTML = total;
+        }
+        
+    </script>
+    <script type="text/javascript">
+        function sumarpeso() {
+            var totalp = 0;
+            $(".montopeso").each(function() {
+                if (isNaN(parseFloat($(this).val()))) {
+                    totalp += 0;
+                } 
+                else {
+                    totalp += parseFloat($(this).val());
+                }
+            });
+
+            //alert(total);
+            document.getElementById('spTotalPeso').innerHTML = totalp;
         }
     </script>
 @endsection

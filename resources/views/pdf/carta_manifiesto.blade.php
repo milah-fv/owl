@@ -13,7 +13,7 @@
 	<header style="text-align: center;">
   		<img height="60px"  src="{{public_path('app_assets/img/cabecera_pdf.png')}}">
   	</header>
-
+  	
   	<table height=60 width="100%" cellpadding="0" cellspacing="0" style="margin-top: 5px;">
   		<tr>
 
